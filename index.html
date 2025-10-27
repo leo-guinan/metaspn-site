@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaSPN: The Conscious League for Founders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">MetaSPN: The Conscious League for Founders</h1>
+            <p class="hero-subtitle">Turning innovation into a spectator sport.</p>
+            <p class="hero-description">Technology made intelligence cheap and visibility scarce.<br>MetaSPN makes human learning visible again.</p>
+            
+            <div class="hero-ctas">
+                <button class="cta-primary" onclick="scrollToSignup()">Join the League</button>
+                <button class="cta-secondary" onclick="scrollToSponsor()">Sponsor Season 1</button>
+                <button class="cta-tertiary" onclick="openVideo()">Watch Day 0 Update</button>
+            </div>
+        </div>
+        <div class="hero-gradient"></div>
+    </section>
+
+    <!-- The Premise -->
+    <section class="premise">
+        <div class="container">
+            <div class="premise-content">
+                <div class="premise-block fade-in">
+                    <h2>Why Now</h2>
+                    <p>Chaos in early-stage markets. AI accelerating faster than founders can learn.<br>Visibility = trust.<br>The only way to keep up is to compete consciously.</p>
+                </div>
+                
+                <div class="premise-visual fade-in">
+                    <div class="chart-container">
+                        <div class="chart-line ai-line"></div>
+                        <div class="chart-line human-line"></div>
+                        <div class="chart-labels">
+                            <span class="ai-label">AI Learning Speed</span>
+                            <span class="human-label">Human Learning Speed</span>
+                        </div>
+                    </div>
+                    <p class="chart-text">MetaSPN closes the gap through sport.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Game Plan -->
+    <section class="game-plan">
+        <div class="container">
+            <div class="game-plan-content">
+                <div class="scoreboard-column">
+                    <h3>Scoreboard v1.0</h3>
+                    <div class="scoreboard">
+                        <div class="score-item">
+                            <span class="score-label">Insight Velocity</span>
+                            <div class="score-bar">
+                                <div class="score-fill" data-score="72"></div>
+                            </div>
+                            <span class="score-value">72%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Predictive Accuracy</span>
+                            <div class="score-bar">
+                                <div class="score-fill" data-score="64"></div>
+                            </div>
+                            <span class="score-value">64%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Ethical Alignment</span>
+                            <div class="score-bar">
+                                <div class="score-fill" data-score="88"></div>
+                            </div>
+                            <span class="score-value">88%</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">Trust Index</span>
+                            <div class="score-bar">
+                                <div class="score-fill" data-score="60"></div>
+                            </div>
+                            <span class="score-value">60%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-plan-text">
+                    <h2>How the League Works</h2>
+                    <ul>
+                        <li>Founders join in small pods ("Clubs") → shared metrics & equity.</li>
+                        <li>Pods compete in Founder Seasons for predictive accuracy and real-world impact.</li>
+                        <li>Sponsors back pods aligned with their values.</li>
+                        <li>The public tracks progress through transparent scores.</li>
+                    </ul>
+                    <button class="cta-primary" onclick="scrollToScoreboard()">See Season 1 Scoreboard →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Week 1 Feature -->
+    <section class="week1-feature">
+        <div class="container">
+            <div class="feature-content">
+                <div class="feature-quote">
+                    <blockquote>"He didn't find form — he engineered it."</blockquote>
+                    <p>Understanding the physics of mastery through conscious competition.</p>
+                    <button class="cta-secondary">Read Essay</button>
+                </div>
+                <div class="feature-visual">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶</div>
+                        <p>Ohtani footage → Writing at whiteboard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the League -->
+    <section class="join-league" id="signup">
+        <div class="container">
+            <div class="signup-content">
+                <h2>Play the Metagame. Join the League.</h2>
+                <p>Weekly briefings on conscious competition, human + AI co-learning, and pod updates.</p>
+                
+                <form class="signup-form" id="convertkit-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <button type="submit" class="cta-primary">Join the League</button>
+                </form>
+                
+                <div class="confirmation-message" id="confirmation" style="display: none;">
+                    <p>"You're in the Conscious League Draft Pool. Expect your scouting report soon."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsor Season 1 -->
+    <section class="sponsor-section" id="sponsor">
+        <div class="container">
+            <h2>Sponsor Season 1</h2>
+            <div class="sponsor-tiers">
+                <div class="tier">
+                    <h3>Signal Sponsor</h3>
+                    <div class="tier-price">$500 – $2,500 / mo</div>
+                    <ul>
+                        <li>Logo + mentions</li>
+                        <li>Research access</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <h3>Insight Partner</h3>
+                    <div class="tier-price">$5k – $15k / qtr</div>
+                    <ul>
+                        <li>Private forecast session</li>
+                        <li>Co-branding</li>
+                    </ul>
+                </div>
+                <div class="tier">
+                    <h3>League Sponsor</h3>
+                    <div class="tier-price">$25k + / yr</div>
+                    <ul>
+                        <li>Featured in media</li>
+                        <li>Seat on Ethics Council</li>
+                        <li>Pod pilot</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="cta-primary" onclick="openSponsorForm()">Apply to Sponsor</button>
+        </div>
+    </section>
+
+    <!-- Columbus Pod -->
+    <section class="columbus-pod">
+        <div class="container">
+            <h2>The Columbus Pod (Season 1 Spotlight)</h2>
+            <p class="pod-subtitle">Three founders. Shared operations. One portfolio.</p>
+            
+            <div class="startup-cards">
+                <div class="startup-card">
+                    <h3>MotivateU 2.0</h3>
+                    <p>AI fitness analytics relaunch</p>
+                </div>
+                <div class="startup-card">
+                    <h3>YSPN</h3>
+                    <p>Youth Sports Production Network</p>
+                </div>
+                <div class="startup-card">
+                    <h3>MetaSPN Core</h3>
+                    <p>League infrastructure & scoring engine</p>
+                </div>
+            </div>
+            
+            <button class="cta-secondary">Meet the Founders →</button>
+        </div>
+    </section>
+
+    <!-- Live Scoreboard -->
+    <section class="live-scoreboard" id="scoreboard">
+        <div class="container">
+            <h2>Live Scoreboard</h2>
+            <div class="scoreboard-widget">
+                <div class="score-item">
+                    <span class="score-label">Insight Velocity</span>
+                    <div class="score-bar">
+                        <div class="score-fill" data-score="72"></div>
+                    </div>
+                    <span class="score-value">72%</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Predictive Accuracy</span>
+                    <div class="score-bar">
+                        <div class="score-fill" data-score="64"></div>
+                    </div>
+                    <span class="score-value">64%</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Ethical Alignment</span>
+                    <div class="score-bar">
+                        <div class="score-fill" data-score="88"></div>
+                    </div>
+                    <span class="score-value">88%</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Trust Index</span>
+                    <div class="score-bar">
+                        <div class="score-fill" data-score="60"></div>
+                    </div>
+                    <span class="score-value">60%</span>
+                </div>
+            </div>
+            <p class="scoreboard-tagline">Scoreboards make mastery visible.</p>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy">
+        <div class="container">
+            <h2>The Philosophy</h2>
+            <div class="philosophy-cards">
+                <div class="philosophy-card">
+                    <h3>Competition raises consciousness.</h3>
+                    <div class="card-content">
+                        <p>When founders compete transparently, everyone learns faster. The game reveals patterns that solo building misses.</p>
+                    </div>
+                </div>
+                <div class="philosophy-card">
+                    <h3>Small > Scale.</h3>
+                    <div class="card-content">
+                        <p>Better to master a small system than to fail at scale. Pods of 3-5 founders outperform solo efforts and massive accelerators.</p>
+                    </div>
+                </div>
+                <div class="philosophy-card">
+                    <h3>Visibility = Trust.</h3>
+                    <div class="card-content">
+                        <p>Transparent metrics build trust faster than marketing. When progress is visible, investors and customers follow.</p>
+                    </div>
+                </div>
+                <div class="philosophy-card">
+                    <h3>Shared risk → shared wisdom.</h3>
+                    <div class="card-content">
+                        <p>When founders share equity and metrics, they share knowledge. Collective intelligence emerges from aligned incentives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>metaspn</h3>
+                    <p>"When reality disbelieves itself, the game begins."</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="#about">About</a>
+                    <a href="#signup">Join</a>
+                    <a href="#sponsor">Sponsor</a>
+                    <a href="#watch">Watch</a>
+                    <a href="#substack">Substack</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

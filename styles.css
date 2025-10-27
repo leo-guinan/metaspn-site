@@ -1,0 +1,724 @@
+/* MetaSPN Landing Page Styles */
+
+:root {
+    --black: #0D0D0D;
+    --neon-blue: #00D4FF;
+    --white: #FFFFFF;
+    --accent-magenta: #FF3366;
+    --gray-dark: #1A1A1A;
+    --gray-medium: #333333;
+    --gray-light: #666666;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--black) 0%, var(--gray-dark) 50%, var(--neon-blue) 100%);
+    overflow: hidden;
+}
+
+.hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 51, 102, 0.1) 0%, transparent 50%);
+    z-index: 1;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--white), var(--neon-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--neon-blue);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--gray-light);
+    margin-bottom: 3rem;
+    line-height: 1.8;
+}
+
+.hero-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-primary, .cta-secondary, .cta-tertiary {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-primary {
+    background: var(--neon-blue);
+    color: var(--black);
+}
+
+.cta-primary:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+.cta-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--neon-blue);
+}
+
+.cta-secondary:hover {
+    background: var(--neon-blue);
+    color: var(--black);
+    transform: translateY(-2px);
+}
+
+.cta-tertiary {
+    background: transparent;
+    color: var(--gray-light);
+    border: 2px solid var(--gray-medium);
+}
+
+.cta-tertiary:hover {
+    background: var(--gray-medium);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Premise Section */
+.premise {
+    padding: 8rem 0;
+    background: var(--gray-dark);
+}
+
+.premise-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.premise-block {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.premise-block h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--neon-blue);
+}
+
+.premise-block p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--gray-light);
+}
+
+.premise-visual {
+    text-align: center;
+}
+
+.chart-container {
+    position: relative;
+    height: 200px;
+    margin: 3rem 0;
+    background: var(--black);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.chart-line {
+    position: absolute;
+    height: 4px;
+    border-radius: 2px;
+    animation: drawLine 2s ease-in-out;
+}
+
+.ai-line {
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    background: var(--accent-magenta);
+    animation-delay: 0.5s;
+}
+
+.human-line {
+    top: 120px;
+    left: 50px;
+    right: 200px;
+    background: var(--neon-blue);
+    animation-delay: 1s;
+}
+
+@keyframes drawLine {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.chart-labels {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    right: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ai-label, .human-label {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+}
+
+.chart-text {
+    font-size: 1.2rem;
+    color: var(--white);
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Game Plan Section */
+.game-plan {
+    padding: 8rem 0;
+    background: var(--black);
+}
+
+.game-plan-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.scoreboard-column h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--neon-blue);
+}
+
+.scoreboard {
+    background: var(--gray-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+}
+
+.score-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+.score-label {
+    min-width: 120px;
+    font-size: 0.9rem;
+    color: var(--gray-light);
+}
+
+.score-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--gray-medium);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--accent-magenta));
+    border-radius: 4px;
+    transition: width 1s ease-in-out;
+    width: 0;
+}
+
+.score-value {
+    min-width: 40px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.game-plan-text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--white);
+}
+
+.game-plan-text ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.game-plan-text li {
+    padding: 0.5rem 0;
+    color: var(--gray-light);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.game-plan-text li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--neon-blue);
+    font-weight: bold;
+}
+
+/* Week 1 Feature */
+.week1-feature {
+    padding: 8rem 0;
+    background: var(--gray-dark);
+}
+
+.feature-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.feature-quote blockquote {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: var(--neon-blue);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.feature-quote p {
+    font-size: 1.2rem;
+    color: var(--gray-light);
+    margin-bottom: 2rem;
+}
+
+.video-placeholder {
+    background: var(--black);
+    height: 300px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--gray-medium);
+    position: relative;
+}
+
+.play-button {
+    font-size: 3rem;
+    color: var(--neon-blue);
+    cursor: pointer;
+}
+
+.video-placeholder p {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    text-align: center;
+    color: var(--gray-light);
+    font-size: 0.9rem;
+}
+
+/* Join League */
+.join-league {
+    padding: 8rem 0;
+    background: var(--black);
+    text-align: center;
+}
+
+.signup-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.signup-content p {
+    font-size: 1.2rem;
+    color: var(--gray-light);
+    margin-bottom: 3rem;
+}
+
+.signup-form {
+    max-width: 400px;
+    margin: 0 auto 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gray-dark);
+    border: 1px solid var(--gray-medium);
+    border-radius: 8px;
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.form-group input::placeholder {
+    color: var(--gray-light);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+}
+
+.confirmation-message {
+    background: var(--gray-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--neon-blue);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.confirmation-message p {
+    color: var(--neon-blue);
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/* Sponsor Section */
+.sponsor-section {
+    padding: 8rem 0;
+    background: var(--gray-dark);
+    text-align: center;
+}
+
+.sponsor-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    color: var(--white);
+}
+
+.sponsor-tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.tier {
+    background: var(--black);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+    transition: transform 0.3s ease;
+}
+
+.tier:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue);
+}
+
+.tier h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--neon-blue);
+}
+
+.tier-price {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+}
+
+.tier ul {
+    list-style: none;
+    text-align: left;
+}
+
+.tier li {
+    padding: 0.5rem 0;
+    color: var(--gray-light);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.tier li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--neon-blue);
+    font-weight: bold;
+}
+
+/* Columbus Pod */
+.columbus-pod {
+    padding: 8rem 0;
+    background: var(--black);
+    text-align: center;
+}
+
+.columbus-pod h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.pod-subtitle {
+    font-size: 1.2rem;
+    color: var(--gray-light);
+    margin-bottom: 3rem;
+}
+
+.startup-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.startup-card {
+    background: var(--gray-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+    transition: transform 0.3s ease;
+}
+
+.startup-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue);
+}
+
+.startup-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--neon-blue);
+}
+
+.startup-card p {
+    color: var(--gray-light);
+}
+
+/* Live Scoreboard */
+.live-scoreboard {
+    padding: 8rem 0;
+    background: var(--gray-dark);
+    text-align: center;
+}
+
+.live-scoreboard h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    color: var(--white);
+}
+
+.scoreboard-widget {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    background: var(--black);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+}
+
+.scoreboard-tagline {
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    font-style: italic;
+}
+
+/* Philosophy */
+.philosophy {
+    padding: 8rem 0;
+    background: var(--black);
+}
+
+.philosophy h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--white);
+}
+
+.philosophy-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.philosophy-card {
+    background: var(--gray-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.philosophy-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-blue);
+}
+
+.philosophy-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--neon-blue);
+}
+
+.philosophy-card p {
+    color: var(--gray-light);
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    padding: 4rem 0;
+    background: var(--gray-dark);
+    border-top: 1px solid var(--gray-medium);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-logo h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo p {
+    color: var(--gray-light);
+    font-style: italic;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: var(--neon-blue);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-ctas {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-plan-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .feature-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .sponsor-tiers {
+        grid-template-columns: 1fr;
+    }
+    
+    .startup-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .philosophy-cards {
+        grid-template-columns: 1fr;
+    }
+}
