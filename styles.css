@@ -395,16 +395,21 @@ body {
     margin-bottom: 3rem;
 }
 
-.signup-form {
+/* ConvertKit Form Styling */
+.convertkit-form-container {
     max-width: 400px;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
 }
 
-.form-group {
-    margin-bottom: 1rem;
+/* Style the ConvertKit form to match our design */
+.convertkit-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.form-group input {
+.convertkit-form-container input[type="email"],
+.convertkit-form-container input[type="text"] {
     width: 100%;
     padding: 1rem;
     background: var(--gray-dark);
@@ -412,31 +417,53 @@ body {
     border-radius: 8px;
     color: var(--white);
     font-size: 1rem;
+    font-family: 'Inter', sans-serif;
 }
 
-.form-group input::placeholder {
+.convertkit-form-container input[type="email"]::placeholder,
+.convertkit-form-container input[type="text"]::placeholder {
     color: var(--gray-light);
 }
 
-.form-group input:focus {
+.convertkit-form-container input[type="email"]:focus,
+.convertkit-form-container input[type="text"]:focus {
     outline: none;
     border-color: var(--neon-blue);
     box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
 }
 
-.confirmation-message {
-    background: var(--gray-dark);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid var(--neon-blue);
-    max-width: 500px;
-    margin: 0 auto;
+.convertkit-form-container button[type="submit"] {
+    padding: 1rem 2rem;
+    background: var(--neon-blue);
+    color: var(--black);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.confirmation-message p {
-    color: var(--neon-blue);
-    font-style: italic;
-    font-size: 1.1rem;
+.convertkit-form-container button[type="submit"]:hover {
+    background: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+}
+
+/* Hide ConvertKit's default styling */
+.convertkit-form-container .formkit-form {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.convertkit-form-container .formkit-field {
+    margin-bottom: 0 !important;
+}
+
+.convertkit-form-container .formkit-label {
+    display: none !important;
 }
 
 /* Sponsor Section */
