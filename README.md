@@ -17,9 +17,15 @@ The Conscious League for Founders - Turning innovation into a spectator sport.
 
 ## Setup
 
-1. Replace `YOUR_CONVERTKIT_API_KEY` and `YOUR_FORM_ID` in `script.js` with your actual ConvertKit credentials
-2. Deploy to GitHub Pages or any static hosting service
-3. Test the email capture functionality
+1. **ConvertKit Form Setup:**
+   - Create a form in ConvertKit
+   - Get your form's POST URL (not the embed code)
+   - Replace `https://your-form-url.convertkit.com` in `script.js` with your actual form URL
+   - The form will submit directly to ConvertKit (no API keys exposed)
+
+2. **Deploy to GitHub Pages or any static hosting service**
+
+3. **Test the email capture functionality**
 
 ## Design System
 

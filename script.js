@@ -1,8 +1,8 @@
 // MetaSPN Landing Page JavaScript
 
 // ConvertKit Configuration
-const CONVERTKIT_API_KEY = 'YOUR_CONVERTKIT_API_KEY'; // Replace with your actual API key
-const CONVERTKIT_FORM_ID = 'YOUR_FORM_ID'; // Replace with your actual form ID
+// Using form embed instead of API for security
+const CONVERTKIT_FORM_URL = 'https://your-form-url.convertkit.com'; // Replace with your actual form URL
 
 // Smooth scrolling for navigation
 function scrollToSignup() {
@@ -74,33 +74,38 @@ function animateScoreboard() {
     });
 }
 
-// ConvertKit form submission
-async function submitToConvertKit(formData) {
-    try {
-        const response = await fetch(`https://api.convertkit.com/v3/forms/${CONVERTKIT_FORM_ID}/subscribe`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                api_key: CONVERTKIT_API_KEY,
-                email: formData.email,
-                first_name: formData.name,
-                fields: {
-                    source: 'metaspn-landing-page'
-                }
-            })
-        });
-
-        if (response.ok) {
-            return { success: true };
-        } else {
-            const error = await response.json();
-            return { success: false, error: error.message };
-        }
-    } catch (error) {
-        return { success: false, error: error.message };
-    }
+// ConvertKit form submission using form embed
+function submitToConvertKit(formData) {
+    // Create a hidden form and submit it to ConvertKit
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = CONVERTKIT_FORM_URL;
+    form.style.display = 'none';
+    
+    // Add form fields
+    const emailField = document.createElement('input');
+    emailField.type = 'email';
+    emailField.name = 'email_address';
+    emailField.value = formData.email;
+    
+    const nameField = document.createElement('input');
+    nameField.type = 'text';
+    nameField.name = 'first_name';
+    nameField.value = formData.name;
+    
+    const sourceField = document.createElement('input');
+    sourceField.type = 'hidden';
+    sourceField.name = 'fields[source]';
+    sourceField.value = 'metaspn-landing-page';
+    
+    form.appendChild(emailField);
+    form.appendChild(nameField);
+    form.appendChild(sourceField);
+    
+    document.body.appendChild(form);
+    form.submit();
+    
+    return { success: true };
 }
 
 // Form handling
@@ -123,7 +128,7 @@ function initFormHandling() {
         submitButton.disabled = true;
         
         try {
-            const result = await submitToConvertKit(formData);
+            const result = submitToConvertKit(formData);
             
             if (result.success) {
                 // Hide form and show confirmation
@@ -132,10 +137,6 @@ function initFormHandling() {
                 
                 // Scroll to confirmation
                 confirmation.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert('Something went wrong. Please try again.');
-                submitButton.textContent = originalText;
-                submitButton.disabled = false;
             }
         } catch (error) {
             alert('Something went wrong. Please try again.');
@@ -208,8 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add some console logging for debugging
     console.log('MetaSPN Landing Page Loaded');
-    console.log('ConvertKit API Key:', CONVERTKIT_API_KEY ? 'Set' : 'Not Set');
-    console.log('ConvertKit Form ID:', CONVERTKIT_FORM_ID ? 'Set' : 'Not Set');
+    console.log('ConvertKit Form URL:', CONVERTKIT_FORM_URL ? 'Set' : 'Not Set');
 });
 
 // Add some utility functions
