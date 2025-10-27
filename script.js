@@ -27,10 +27,9 @@ function openVideo() {
     });
 }
 
-// Sponsor form (placeholder)
+// Sponsor form (Tally form)
 function openSponsorForm() {
-    // For now, just show an alert. Replace with actual sponsor form
-    alert('Sponsor application form will open here');
+    window.open('https://tally.so/r/mOpBdp', '_blank');
 }
 
 // Scroll animations
