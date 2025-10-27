@@ -19,10 +19,12 @@ function scrollToScoreboard() {
     });
 }
 
-// Video modal (placeholder)
+// Video modal (now embedded directly)
 function openVideo() {
-    // For now, just show an alert. Replace with actual video modal
-    alert('Day 0 Update video will be embedded here');
+    // Video is now embedded in the Week 1 Feature section
+    document.querySelector('.week1-feature').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
 }
 
 // Sponsor form (placeholder)
