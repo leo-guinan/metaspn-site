@@ -92,7 +92,9 @@ body {
     flex-wrap: wrap;
 }
 
-.cta-primary, .cta-secondary, .cta-tertiary {
+.cta-primary, .cta-secondary, .cta-tertiary, 
+button.cta-primary, button.cta-secondary, button.cta-tertiary,
+a.cta-primary, a.cta-secondary, a.cta-tertiary {
     padding: 1rem 2rem;
     border: none;
     border-radius: 8px;
