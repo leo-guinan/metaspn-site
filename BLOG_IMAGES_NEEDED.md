@@ -3,7 +3,7 @@
 ## Featured Images for Blog Posts
 
 ### 1. The MetaSPN League: Building the Conscious Metrics Network
-**File:** `images/metaspn-league-featured.jpg`
+**File:** `images/metaspn-league-featured.png`
 **Dimensions:** 1200x630px (recommended for social sharing)
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -14,7 +14,7 @@
 **Description:** Visual representing a network of founders and operators building conscious metrics
 
 ### 2. The Four Hidden Variables of Conscious Business
-**File:** `images/four-variables-featured.jpg`
+**File:** `images/four-variables-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -25,7 +25,7 @@
 **Description:** Visual showing the four hidden variables interconnected in a system
 
 ### 3. Predictability Is the New Productivity
-**File:** `images/predictability-productivity-featured.jpg`
+**File:** `images/predictability-productivity-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -36,7 +36,7 @@
 **Description:** Visual representing the shift from traditional productivity to predictability metrics
 
 ### 4. What Is Time Violence — and How to Prevent It
-**File:** `images/time-violence-featured.jpg`
+**File:** `images/time-violence-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -47,7 +47,7 @@
 **Description:** Visual representing the concept of time violence and its prevention
 
 ### 5. How to Measure Learning Velocity
-**File:** `images/learning-velocity-featured.jpg`
+**File:** `images/learning-velocity-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -58,7 +58,7 @@
 **Description:** Visual representing the measurement of learning velocity in organizations
 
 ### 6. The Metagame of Metrics: Measuring Trust and Coordination
-**File:** `images/metagame-metrics-featured.jpg`
+**File:** `images/metagame-metrics-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -69,7 +69,7 @@
 **Description:** Visual representing the metagame layer beneath traditional metrics
 
 ### 7. Why OKRs Are Breaking: The Metric Crisis of the Acceleration Age
-**File:** `images/okrs-breaking-featured.jpg`
+**File:** `images/okrs-breaking-featured.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -82,7 +82,7 @@
 ## Author Images
 
 ### 8. Leo Guinan Author Photo
-**File:** `images/leo-guinan.jpg`
+**File:** `images/leo-guinan.png`
 **Dimensions:** 200x200px (square)
 **Style:** Professional headshot
 **Elements:**
@@ -94,7 +94,7 @@
 ## Social Media Images
 
 ### 9. Blog Index Open Graph Image
-**File:** `images/blog-og.jpg`
+**File:** `images/blog-og.png`
 **Dimensions:** 1200x630px
 **Style:** Dark theme with neon blue accents
 **Elements:**
@@ -106,13 +106,13 @@
 
 ### 10. Individual Post Open Graph Images
 **Files:** 
-- `images/metaspn-league-og.jpg`
-- `images/four-variables-og.jpg`
-- `images/predictability-productivity-og.jpg`
-- `images/time-violence-og.jpg`
-- `images/learning-velocity-og.jpg`
-- `images/metagame-metrics-og.jpg`
-- `images/okrs-breaking-og.jpg`
+- `images/metaspn-league-og.png`
+- `images/four-variables-og.png`
+- `images/predictability-productivity-og.png`
+- `images/time-violence-og.png`
+- `images/learning-velocity-og.png`
+- `images/metagame-metrics-og.png`
+- `images/okrs-breaking-og.png`
 
 **Dimensions:** 1200x630px each
 **Style:** Dark theme with neon blue accents
@@ -141,10 +141,10 @@
 - Optimized for both desktop and mobile viewing
 
 ## File Naming Convention
-- Featured images: `[post-slug]-featured.jpg`
-- Open Graph images: `[post-slug]-og.jpg`
-- Author images: `leo-guinan.jpg`
-- Blog index: `blog-og.jpg`
+- Featured images: `[post-slug]-featured.png`
+- Open Graph images: `[post-slug]-og.png`
+- Author images: `leo-guinan.png`
+- Blog index: `blog-og.png`
 
 ## Technical Requirements
 - **Format:** JPG (for photos) or PNG (for graphics with transparency)

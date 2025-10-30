@@ -30,7 +30,7 @@ Search and replace these placeholders in your new post:
 | `POST_DESCRIPTION` | Meta description | "Exploring how conscious competition will reshape startup culture..." |
 | `POST_KEYWORDS` | Comma-separated keywords | "founders, competition, startup, innovation" |
 | `POST_SLUG` | URL-friendly slug | "future-founder-competition" |
-| `POST_IMAGE` | Featured image filename | "future-competition.jpg" |
+| `POST_IMAGE` | Featured image filename | "future-competition.png" |
 | `POST_PUBLISH_DATE` | ISO date | "2024-10-27T10:00:00Z" |
 | `POST_MODIFIED_DATE` | ISO date | "2024-10-27T10:00:00Z" |
 | `POST_TAGS` | Comma-separated tags | "MetaSPN, Competition, Future" |
