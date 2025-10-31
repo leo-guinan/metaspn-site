@@ -654,6 +654,117 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     line-height: 1.6;
 }
 
+/* Playbooks Section */
+.playbooks-section {
+    background: var(--black);
+    padding: 6rem 0;
+}
+
+.playbook-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.playbook-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.playbook-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(16, 185, 129, 0.9);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 4px;
+    background: rgba(16, 185, 129, 0.1);
+    width: fit-content;
+}
+
+.playbook-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.playbook-content p {
+    font-size: 1.1rem;
+    color: var(--gray-light);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.playbook-content .cta-primary {
+    margin-top: 1.5rem;
+    width: fit-content;
+}
+
+.playbook-visual {
+    position: relative;
+}
+
+.playbook-preview {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.playbook-preview:hover {
+    transform: translateY(-4px);
+}
+
+.playbook-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--gray-medium);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.playbook-preview-card {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.playbook-preview-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.playbook-preview:hover .playbook-preview-card img {
+    transform: scale(1.05);
+}
+
+.preview-tag {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: rgba(16, 185, 129, 0.9);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+}
+
 /* Featured Posts */
 .featured-posts {
     background: var(--gray-dark);
@@ -896,6 +1007,20 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     
     .philosophy-cards {
         grid-template-columns: 1fr;
+    }
+    
+    /* Playbooks Section Mobile */
+    .playbook-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .playbook-content h2 {
+        font-size: 2rem;
+    }
+    
+    .playbook-content p {
+        font-size: 1rem;
     }
     
     /* Featured Posts Mobile */
