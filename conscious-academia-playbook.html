@@ -48,28 +48,31 @@
         }
 
         .playbook-header {
+            background: var(--gray-dark);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .playbook-header .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2.5rem 1.5rem 1.5rem;
+            padding: 0 1.5rem;
         }
 
         .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
             color: var(--gray-light);
-            margin-bottom: 1rem;
         }
 
         .breadcrumb a {
-            color: var(--gray-light);
+            color: var(--neon-blue);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .breadcrumb a:hover {
-            color: var(--neon-blue);
+            text-decoration: underline;
         }
 
         .breadcrumb span {
@@ -78,20 +81,19 @@
 
         .playbook-header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 600;
-            letter-spacing: -0.02em;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
             color: var(--white);
-            margin-top: 1rem;
-            margin-bottom: 0.75rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
         }
 
         .playbook-header p {
-            max-width: 48rem;
-            font-size: 1.125rem;
-            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
             color: var(--gray-light);
-            margin-top: 0.75rem;
         }
 
         /* Triptych Grid */
@@ -311,7 +313,15 @@
             }
 
             .playbook-header {
-                padding: 1.5rem 1rem 1rem;
+                padding: 3rem 0;
+            }
+
+            .playbook-header h1 {
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
+            }
+
+            .playbook-header p {
+                font-size: 1.1rem;
             }
 
             .playbook-content {
@@ -366,13 +376,14 @@
 
     <!-- Header -->
     <header class="playbook-header">
-        <div class="breadcrumb">
-            <a href="index.html">MetaSPN</a>
-            <span>›</span>
-            <span>Playbooks</span>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / 
+                <span>Conscious Academia Playbook</span>
+            </div>
+            <h1>Conscious Academia Playbook</h1>
+            <p>A three-part blueprint for universities competing in the age of AI: growth velocity, time protection, and ethical trust. Built in public with Idea Nexus Ventures.</p>
         </div>
-        <h1>Conscious Academia Playbook</h1>
-        <p>A three-part blueprint for universities competing in the age of AI: growth velocity, time protection, and ethical trust. Built in public with Idea Nexus Ventures.</p>
     </header>
 
     <!-- Triptych strip (stitched edges on large screens) -->
