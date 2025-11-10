@@ -920,6 +920,266 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     text-align: center;
 }
 
+/* Pods & Founders */
+.pods-founders {
+    background: var(--black);
+    padding: 6rem 0;
+}
+
+.pods-founders h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.pods-founders .section-subtitle {
+    text-align: center;
+    color: var(--gray-light);
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pod-showcase {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.pod-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-medium);
+}
+
+.pod-header h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: var(--neon-blue);
+    margin: 0;
+}
+
+.pod-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    border-radius: 20px;
+    color: var(--neon-blue);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pod-description {
+    margin-bottom: 3rem;
+}
+
+.pod-description p {
+    color: var(--gray-light);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.founders-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.founder-card {
+    background: var(--gray-dark);
+    border: 1px solid var(--gray-medium);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.founder-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+}
+
+.founder-hero {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.founder-image {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.founder-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--neon-blue);
+}
+
+.founder-rank {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--accent-magenta));
+    border: 3px solid var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.founder-header {
+    flex: 1;
+}
+
+.founder-header h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: var(--white);
+    margin: 0 0 0.5rem 0;
+}
+
+.founder-title {
+    color: var(--gray-light);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.founder-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 12px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--gray-light);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+}
+
+.founder-bio {
+    margin-bottom: 2rem;
+}
+
+.founder-bio p {
+    color: var(--gray-light);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.founder-feats {
+    margin-bottom: 2rem;
+}
+
+.founder-feats h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.founder-feats ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.founder-feats li {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--neon-blue);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.founder-feats li:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.feat-type {
+    flex-shrink: 0;
+    min-width: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--neon-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.feat-desc {
+    color: var(--gray-light);
+    line-height: 1.6;
+}
+
+.founder-social {
+    display: flex;
+    gap: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-medium);
+}
+
+.social-link {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--gray-medium);
+    border-radius: 8px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background: var(--neon-blue);
+    border-color: var(--neon-blue);
+    color: var(--black);
+    transform: translateY(-2px);
+}
+
 /* Footer */
 .footer {
     padding: 4rem 0;
@@ -1049,5 +1309,73 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     
     .featured-post-excerpt {
         font-size: 0.95rem;
+    }
+    
+    /* Pods & Founders Mobile */
+    .pods-founders h2 {
+        font-size: 2rem;
+    }
+    
+    .pods-founders .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .pod-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .pod-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .founder-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .founder-image {
+        margin: 0 auto;
+    }
+    
+    .founder-header {
+        text-align: center;
+    }
+    
+    .founder-header h4 {
+        font-size: 1.3rem;
+    }
+    
+    .founder-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .founder-bio p {
+        font-size: 1rem;
+    }
+    
+    .founder-feats li {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .feat-type {
+        min-width: auto;
+    }
+    
+    .founder-social {
+        flex-direction: column;
+    }
+    
+    .social-link {
+        width: 100%;
+        text-align: center;
     }
 }

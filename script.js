@@ -19,6 +19,12 @@ function scrollToScoreboard() {
     });
 }
 
+function scrollToPods() {
+    document.getElementById('pods').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
+
 // Video modal (now embedded directly)
 function openVideo() {
     // Video is now embedded in the Week 1 Feature section
