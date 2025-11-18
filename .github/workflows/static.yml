@@ -31,13 +31,58 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build blog from Sanity
+        env:
+          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          SANITY_DATASET: ${{ secrets.SANITY_DATASET || 'production' }}
+        run: |
+          if [ -z "$SANITY_PROJECT_ID" ]; then
+            echo "⚠️  SANITY_PROJECT_ID not set - skipping blog build"
+            echo "   Set it as a GitHub Secret to enable automated blog builds"
+          else
+            npm run build:blog
+          fi
+      
+      - name: Build Sanity Studio
+        env:
+          SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
+          SANITY_DATASET: ${{ secrets.SANITY_DATASET || 'production' }}
+        run: |
+          if [ -z "$SANITY_PROJECT_ID" ]; then
+            echo "⚠️  SANITY_PROJECT_ID not set - skipping studio build"
+          else
+            npm run build:studio || echo "⚠️  Studio build failed (may need additional setup)"
+          fi
+      
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      
+      - name: Copy studio to root (if built)
+        run: |
+          if [ -d "studio-dist" ]; then
+            echo "📁 Copying studio files..."
+            cp -r studio-dist/* . || true
+            # Create studio directory structure for GitHub Pages
+            mkdir -p studio
+            cp -r studio-dist/* studio/ || true
+          fi
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
+          # Upload entire repository (includes studio if built)
           path: '.'
+      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

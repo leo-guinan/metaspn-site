@@ -1,0 +1,29 @@
+{
+  "name": "metaspn-blog",
+  "version": "1.0.0",
+  "description": "MetaSPN blog with Sanity CMS integration",
+  "type": "module",
+  "scripts": {
+    "build:blog": "node scripts/generate-blog.js",
+    "build:studio": "sanity build --base-path /studio --output-path studio-dist",
+    "import:posts": "node scripts/import-posts-to-sanity.js",
+    "sanity:dev": "sanity dev",
+    "sanity:deploy": "sanity deploy"
+  },
+  "keywords": [
+    "blog",
+    "cms",
+    "sanity"
+  ],
+  "author": "Leo Guinan",
+  "license": "MIT",
+  "dependencies": {
+    "@sanity/cli": "^3.15.0",
+    "@sanity/client": "^6.15.0",
+    "@sanity/vision": "^3.15.0",
+    "dotenv": "^16.4.5",
+    "jsdom": "^24.0.0",
+    "sanity": "^3.15.0",
+    "styled-components": "^6.1.19"
+  }
+}
