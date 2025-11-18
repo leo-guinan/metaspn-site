@@ -188,6 +188,44 @@ function escapeHTML(str) {
     .replace(/'/g, '&#039;')
 }
 
+// Generate landing page with embedded featured posts data
+function generateLandingPageWithFeaturedPosts(featuredPosts, template) {
+  // Create JSON data for featured posts
+  const postsData = featuredPosts.map(post => {
+    const slug = post.slug.current
+    const featuredImageURL = getImageURL(post.featuredImage?.asset)
+    
+    return {
+      title: post.title,
+      slug: slug,
+      excerpt: post.excerpt || post.description,
+      description: post.description,
+      publishedAt: post.publishedAt,
+      tags: post.tags || [],
+      readTime: post.readTime || 5,
+      featuredImage: {
+        url: featuredImageURL,
+        alt: post.featuredImage?.alt || post.title
+      }
+    }
+  })
+  
+  // Embed the data as JSON in a script tag
+  const scriptTag = `<script type="application/json" id="featured-posts-data">${JSON.stringify(postsData)}</script>`
+  
+  // Insert before the closing body tag or before the script.js include
+  // Look for the script.js include and insert before it
+  if (template.includes('<script src="script.js"></script>')) {
+    return template.replace(
+      '<script src="script.js"></script>',
+      `${scriptTag}\n    <script src="script.js"></script>`
+    )
+  }
+  
+  // Fallback: insert before closing body tag
+  return template.replace('</body>', `    ${scriptTag}\n</body>`)
+}
+
 async function main() {
   console.log('🚀 Fetching blog posts from Sanity...')
   
@@ -227,6 +265,7 @@ async function main() {
     // Read templates
     const postTemplate = readFileSync(join(rootDir, 'blog-post-template.html'), 'utf-8')
     const indexTemplate = readFileSync(join(rootDir, 'blog/index.html'), 'utf-8')
+    const landingPageTemplate = readFileSync(join(rootDir, 'index.html'), 'utf-8')
     
     // Ensure blog directory exists
     const blogDir = join(rootDir, 'blog')
@@ -247,6 +286,12 @@ async function main() {
     const indexHTML = generateIndexHTML(posts, indexTemplate)
     writeFileSync(join(blogDir, 'index.html'), indexHTML, 'utf-8')
     console.log('   ✓ Generated index.html')
+    
+    // Update landing page with featured posts data
+    console.log('🏠 Updating landing page with featured posts...')
+    const landingPageHTML = generateLandingPageWithFeaturedPosts(posts.slice(0, 3), landingPageTemplate)
+    writeFileSync(join(rootDir, 'index.html'), landingPageHTML, 'utf-8')
+    console.log('   ✓ Updated index.html with featured posts')
     
     console.log('✨ Blog generation complete!')
     

@@ -131,48 +131,23 @@ function initParallax() {
     });
 }
 
-// Featured Posts functionality - Load from Sanity
-async function loadFeaturedPosts() {
+// Featured Posts functionality - Load from embedded data (no CORS needed!)
+function loadFeaturedPosts() {
     const container = document.getElementById('featured-posts-grid');
     if (!container) return;
 
     try {
-        // Sanity project ID (public, not sensitive)
-        const projectId = 'r869qm8k';
-        const dataset = 'production';
-        
-        // GROQ query to fetch latest 3 posts
-        const query = `*[_type == "post" && defined(publishedAt)] | order(publishedAt desc) [0...3] {
-            title,
-            slug,
-            excerpt,
-            description,
-            publishedAt,
-            tags,
-            readTime,
-            featuredImage {
-                asset-> {
-                    url,
-                    _id
-                },
-                alt
-            }
-        }`;
-        
-        // Fetch posts from Sanity
-        const response = await fetch(
-            `https://${projectId}.api.sanity.io/v2024-01-01/data/query/${dataset}?query=${encodeURIComponent(query)}`
-        );
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch posts from Sanity');
+        // Get embedded posts data from the page (injected during build)
+        const dataScript = document.getElementById('featured-posts-data');
+        if (!dataScript) {
+            console.log('No featured posts data found - posts will be generated during build');
+            return;
         }
 
-        const data = await response.json();
-        const posts = data.result || [];
+        const posts = JSON.parse(dataScript.textContent);
 
         if (posts.length === 0) {
-            console.log('No posts found in Sanity');
+            console.log('No featured posts found');
             return;
         }
 
@@ -184,12 +159,12 @@ async function loadFeaturedPosts() {
             const card = document.createElement('article');
             card.className = 'featured-post-card';
             
-            const slug = post.slug?.current || '';
-            const imageUrl = post.featuredImage?.asset?.url || 'images/blog-og.jpg';
+            const slug = post.slug || '';
+            const imageUrl = post.featuredImage?.url || 'images/blog-og.jpg';
             const publishedDate = post.publishedAt 
                 ? new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
                 : '';
-            const tags = post.tags?.join(', ') || '';
+            const tags = Array.isArray(post.tags) ? post.tags.join(', ') : (post.tags || '');
             const readTime = post.readTime ? `${post.readTime} min read` : '5 min read';
             
             card.innerHTML = `
@@ -217,10 +192,10 @@ async function loadFeaturedPosts() {
             container.appendChild(card);
         });
 
-        console.log('✅ Featured posts loaded from Sanity:', posts.map(p => p.title));
+        console.log('✅ Featured posts loaded:', posts.map(p => p.title));
         
     } catch (error) {
-        console.error('❌ Error loading featured posts from Sanity:', error);
+        console.error('❌ Error loading featured posts:', error);
         // Fallback: show message or hide section
         container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Loading posts...</p>';
     }
