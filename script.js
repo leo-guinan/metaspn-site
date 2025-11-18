@@ -204,7 +204,12 @@ function loadFeaturedPosts() {
 // Theme Toggle Functionality
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle?.querySelector('.theme-toggle-icon');
+    if (!themeToggle) {
+        console.error('Theme toggle button not found!');
+        return;
+    }
+    
+    const themeIcon = themeToggle.querySelector('.theme-toggle-icon');
     const root = document.documentElement;
     
     // Check for saved theme preference or default to dark mode
@@ -213,7 +218,7 @@ function initThemeToggle() {
     updateThemeIcon(savedTheme, themeIcon);
     
     // Toggle theme on button click
-    themeToggle?.addEventListener('click', () => {
+    themeToggle.addEventListener('click', () => {
         const currentTheme = root.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
@@ -221,6 +226,8 @@ function initThemeToggle() {
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme, themeIcon);
     });
+    
+    console.log('✅ Theme toggle initialized');
 }
 
 function updateThemeIcon(theme, iconElement) {
