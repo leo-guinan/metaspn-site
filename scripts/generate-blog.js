@@ -195,8 +195,12 @@ function generateLandingPageWithFeaturedPosts(featuredPosts, template) {
     const slug = post.slug.current
     const featuredImageURL = getImageURL(post.featuredImage?.asset)
     
+    // Clean up title - remove any "- MetaSPN Blog" suffix that might be added
+    let title = post.title || 'Untitled'
+    title = title.replace(/\s*-\s*MetaSPN\s*Blog\s*$/i, '').trim()
+    
     return {
-      title: post.title,
+      title: title,
       slug: slug,
       excerpt: post.excerpt || post.description,
       description: post.description,
@@ -205,7 +209,7 @@ function generateLandingPageWithFeaturedPosts(featuredPosts, template) {
       readTime: post.readTime || 5,
       featuredImage: {
         url: featuredImageURL,
-        alt: post.featuredImage?.alt || post.title
+        alt: post.featuredImage?.alt || title
       }
     }
   })

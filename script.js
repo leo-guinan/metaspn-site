@@ -134,17 +134,28 @@ function initParallax() {
 // Featured Posts functionality - Load from embedded data (no CORS needed!)
 function loadFeaturedPosts() {
     const container = document.getElementById('featured-posts-grid');
-    if (!container) return;
+    if (!container) {
+        console.log('Featured posts container not found');
+        return;
+    }
 
     try {
         // Get embedded posts data from the page (injected during build)
         const dataScript = document.getElementById('featured-posts-data');
         if (!dataScript) {
             console.log('No featured posts data found - posts will be generated during build');
+            container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">No posts available yet. Check back soon!</p>';
             return;
         }
 
-        const posts = JSON.parse(dataScript.textContent);
+        let posts;
+        try {
+            posts = JSON.parse(dataScript.textContent);
+        } catch (parseError) {
+            console.error('Error parsing featured posts JSON:', parseError);
+            container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Error loading posts. Please refresh the page.</p>';
+            return;
+        }
 
         if (posts.length === 0) {
             console.log('No featured posts found');
@@ -192,12 +203,16 @@ function loadFeaturedPosts() {
             container.appendChild(card);
         });
 
-        console.log('✅ Featured posts loaded:', posts.map(p => p.title));
+        console.log('✅ Featured posts loaded:', posts.length, 'posts');
+        console.log('   Posts:', posts.map(p => p.title || p.slug));
         
     } catch (error) {
         console.error('❌ Error loading featured posts:', error);
-        // Fallback: show message or hide section
-        container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Loading posts...</p>';
+        console.error('   Error details:', error.message, error.stack);
+        // Fallback: show message
+        if (container) {
+            container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Error loading posts. Please refresh the page.</p>';
+        }
     }
 }
 
