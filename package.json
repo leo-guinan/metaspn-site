@@ -7,6 +7,7 @@
     "build:blog": "node scripts/generate-blog.js",
     "build:studio": "sanity build --base-path /studio --output-path studio-dist",
     "import:posts": "node scripts/import-posts-to-sanity.js",
+    "generate:competition": "node scripts/generate-competition-page.js",
     "sanity:dev": "sanity dev",
     "sanity:deploy": "sanity deploy"
   },

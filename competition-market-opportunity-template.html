@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Opportunity: COMPETITION_NAME | MetaSPN</title>
+    <meta name="description" content="Market opportunity analysis for COMPETITION_NAME - tracking three public stock targets that frame the market for competitors.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://metaspn.network/competitions/COMPETITION_SLUG.html">
+    <meta property="og:title" content="Market Opportunity: COMPETITION_NAME | MetaSPN">
+    <meta property="og:description" content="Market opportunity analysis tracking three public stock targets that frame the market for competitors.">
+    <meta property="og:image" content="https://metaspn.network/images/blog-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://metaspn.network/competitions/COMPETITION_SLUG.html">
+    <meta property="twitter:title" content="Market Opportunity: COMPETITION_NAME | MetaSPN">
+    <meta property="twitter:description" content="Market opportunity analysis tracking three public stock targets that frame the market for competitors.">
+    <meta property="twitter:image" content="https://metaspn.network/images/blog-og.jpg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../blog-styles.css">
+    <style>
+        /* Competition-specific styles */
+        .competition-header {
+            background: var(--gray-dark);
+            padding: 4rem 0 2rem;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        
+        .competition-breadcrumb {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--gray-light);
+        }
+        
+        .competition-breadcrumb a {
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+        
+        .competition-breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .competition-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .competition-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-light);
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .market-opportunity-section {
+            padding: 4rem 0;
+            background: var(--black);
+        }
+        
+        .market-context {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            padding: 2rem;
+            background: var(--gray-dark);
+            border-radius: 12px;
+            border: 1px solid var(--gray-medium);
+        }
+        
+        .market-context h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .market-context p {
+            color: var(--gray-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        
+        .targets-section {
+            padding: 4rem 0;
+            background: var(--gray-dark);
+        }
+        
+        .targets-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .targets-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .targets-header p {
+            color: var(--gray-light);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .targets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .target-card {
+            background: var(--black);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--gray-medium);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .target-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        }
+        
+        .target-order {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--neon-blue);
+            color: var(--black);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .target-ticker {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .target-company {
+            font-size: 1.1rem;
+            color: var(--gray-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .stock-price {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-price-current {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .stock-price-change {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .stock-price-change.positive {
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .stock-price-change.negative {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .stock-price-change.neutral {
+            color: var(--gray-light);
+            background: rgba(102, 102, 102, 0.1);
+        }
+        
+        .stock-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray-light);
+        }
+        
+        .stock-meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stock-meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stock-meta-value {
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .target-analysis {
+            border-top: 1px solid var(--gray-medium);
+            padding-top: 1.5rem;
+        }
+        
+        .target-analysis h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: var(--neon-blue);
+            margin-bottom: 0.75rem;
+        }
+        
+        .target-analysis p {
+            color: var(--gray-light);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .cascade-indicator {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+        }
+        
+        .competition-cta {
+            padding: 4rem 0;
+            background: var(--black);
+            text-align: center;
+        }
+        
+        .competition-cta h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .competition-cta p {
+            color: var(--gray-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .targets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stock-price {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .stock-meta {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+        <span class="theme-toggle-icon">☀️</span>
+    </button>
+    
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="../index.html" class="logo">MetaSPN</a>
+                <div class="nav-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#signup">Join League</a>
+                    <a href="../index.html#sponsor">Sponsor</a>
+                    <a href="../blog/index.html">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Competition Header -->
+    <header class="competition-header">
+        <div class="container">
+            <div class="competition-breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="../index.html#competitions">Competitions</a> / 
+                <span>COMPETITION_NAME</span>
+            </div>
+            
+            <h1 class="competition-title">Market Opportunity: COMPETITION_NAME</h1>
+            <p class="competition-subtitle">Tracking three public stock targets that frame the market opportunity for competitors</p>
+        </div>
+    </header>
+
+    <!-- Market Context Section -->
+    <section class="market-opportunity-section">
+        <div class="container">
+            <div class="market-context">
+                <h2>Why These Targets Matter</h2>
+                <p>
+                    These three public companies represent the likeliest cascade order in this market. 
+                    By tracking their stock performance, we can see how existing "broken" models are 
+                    being valued—and where the opportunity lies for competitors building better alternatives.
+                </p>
+                <p>
+                    Each target represents a different stage of market evolution, from the most vulnerable 
+                    incumbent to the emerging challenger. Understanding their trajectories helps frame 
+                    the competitive landscape and identify where new solutions can create the most impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stock Targets Section -->
+    <section class="targets-section">
+        <div class="container">
+            <div class="targets-header">
+                <h2>The Three Targets</h2>
+                <p>Public stocks representing the cascade order—from most vulnerable to emerging challenger</p>
+            </div>
+            
+            <div class="targets-grid">
+                <!-- Target 1: Most Vulnerable -->
+                <div class="target-card">
+                    <div class="target-order">1</div>
+                    <div class="target-ticker">TARGET_1_TICKER</div>
+                    <div class="target-company">TARGET_1_COMPANY</div>
+                    
+                    <div class="stock-price">
+                        <span class="stock-price-current" id="price-1">$TARGET_1_PRICE</span>
+                        <span class="stock-price-change TARGET_1_CHANGE_CLASS" id="change-1">
+                            TARGET_1_CHANGE
+                        </span>
+                    </div>
+                    
+                    <div class="stock-meta">
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W High</span>
+                            <span class="stock-meta-value">$TARGET_1_HIGH</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W Low</span>
+                            <span class="stock-meta-value">$TARGET_1_LOW</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">Market Cap</span>
+                            <span class="stock-meta-value">$TARGET_1_MCAP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="target-analysis">
+                        <h4>Why This Target Matters</h4>
+                        <p>TARGET_1_ANALYSIS</p>
+                    </div>
+                </div>
+                
+                <!-- Target 2: Transitional -->
+                <div class="target-card">
+                    <div class="target-order">2</div>
+                    <div class="target-ticker">TARGET_2_TICKER</div>
+                    <div class="target-company">TARGET_2_COMPANY</div>
+                    
+                    <div class="stock-price">
+                        <span class="stock-price-current" id="price-2">$TARGET_2_PRICE</span>
+                        <span class="stock-price-change TARGET_2_CHANGE_CLASS" id="change-2">
+                            TARGET_2_CHANGE
+                        </span>
+                    </div>
+                    
+                    <div class="stock-meta">
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W High</span>
+                            <span class="stock-meta-value">$TARGET_2_HIGH</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W Low</span>
+                            <span class="stock-meta-value">$TARGET_2_LOW</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">Market Cap</span>
+                            <span class="stock-meta-value">$TARGET_2_MCAP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="target-analysis">
+                        <h4>Why This Target Matters</h4>
+                        <p>TARGET_2_ANALYSIS</p>
+                    </div>
+                </div>
+                
+                <!-- Target 3: Emerging Challenger -->
+                <div class="target-card">
+                    <div class="target-order">3</div>
+                    <div class="target-ticker">TARGET_3_TICKER</div>
+                    <div class="target-company">TARGET_3_COMPANY</div>
+                    
+                    <div class="stock-price">
+                        <span class="stock-price-current" id="price-3">$TARGET_3_PRICE</span>
+                        <span class="stock-price-change TARGET_3_CHANGE_CLASS" id="change-3">
+                            TARGET_3_CHANGE
+                        </span>
+                    </div>
+                    
+                    <div class="stock-meta">
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W High</span>
+                            <span class="stock-meta-value">$TARGET_3_HIGH</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">52W Low</span>
+                            <span class="stock-meta-value">$TARGET_3_LOW</span>
+                        </div>
+                        <div class="stock-meta-item">
+                            <span class="stock-meta-label">Market Cap</span>
+                            <span class="stock-meta-value">$TARGET_3_MCAP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="target-analysis">
+                        <h4>Why This Target Matters</h4>
+                        <p>TARGET_3_ANALYSIS</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cascade-indicator">
+                <span>↓ Cascade Order: Most Vulnerable → Transitional → Emerging Challenger ↓</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competition CTA -->
+    <section class="competition-cta">
+        <div class="container">
+            <h2>Ready to Compete?</h2>
+            <p>Join the competition and build a better alternative to these broken models.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="../index.html#signup" class="cta-primary">Enter Competition →</a>
+                <a href="../index.html#competitions" class="cta-secondary">View All Competitions →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>metaspn</h3>
+                    <p>"When reality disbelieves itself, the game begins."</p>
+                </div>
+                <nav class="footer-nav">
+                    <a href="../index.html#join">Join</a>
+                    <a href="../blog/index.html">Blog</a>
+                    <a href="../conscious-academia-playbook.html">Playbooks</a>
+                    <a href="../index.html#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        // Stock price update functionality
+        // You can integrate with a stock API here (e.g., Alpha Vantage, Yahoo Finance, etc.)
+        
+        // Example: Update prices periodically (replace with actual API calls)
+        async function updateStockPrices() {
+            const tickers = ['TARGET_1_TICKER', 'TARGET_2_TICKER', 'TARGET_3_TICKER'];
+            
+            // This is a placeholder - replace with actual stock API integration
+            // Example API: https://www.alphavantage.co/documentation/
+            // Or use a free tier like: https://finnhub.io/
+            
+            tickers.forEach(async (ticker, index) => {
+                try {
+                    // Replace with your actual API call
+                    // const response = await fetch(`YOUR_API_ENDPOINT/${ticker}`);
+                    // const data = await response.json();
+                    
+                    // Update the price display
+                    // document.getElementById(`price-${index + 1}`).textContent = `$${data.price}`;
+                    // document.getElementById(`change-${index + 1}`).textContent = `${data.change}%`;
+                    
+                    console.log(`Would update ${ticker} price here`);
+                } catch (error) {
+                    console.error(`Error updating ${ticker}:`, error);
+                }
+            });
+        }
+        
+        // Initialize theme toggle (from script.js)
+        // Stock prices can be updated on page load or periodically
+        // updateStockPrices();
+        // setInterval(updateStockPrices, 60000); // Update every minute
+    </script>
+    
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+</body>
+</html>
+

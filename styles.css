@@ -1140,6 +1140,204 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     line-height: 1.6;
 }
 
+/* Competition Preview Section */
+.competition-preview-section {
+    background: var(--gray-dark);
+    padding: 6rem 0;
+    border-top: 1px solid var(--gray-medium);
+    border-bottom: 1px solid var(--gray-medium);
+}
+
+.competition-preview-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.competition-preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.competition-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-magenta);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(255, 51, 102, 0.3);
+    border-radius: 4px;
+    background: rgba(255, 51, 102, 0.1);
+    width: fit-content;
+}
+
+.competition-preview-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.competition-subtitle {
+    font-size: 1.2rem;
+    color: var(--neon-blue);
+    font-weight: 600;
+    margin: 0;
+}
+
+.competition-description {
+    font-size: 1.1rem;
+    color: var(--gray-light);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.competition-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--black);
+    border-radius: 12px;
+    border: 1px solid var(--gray-medium);
+}
+
+.competition-stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-magenta);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.competition-preview-content .cta-primary {
+    margin-top: 1rem;
+    width: fit-content;
+}
+
+.competition-preview-visual {
+    position: relative;
+}
+
+.competition-preview-card {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.competition-preview-card:hover {
+    transform: translateY(-4px);
+}
+
+.competition-targets-preview {
+    background: var(--black);
+    border-radius: 16px;
+    padding: 2rem;
+    border: 2px solid var(--gray-medium);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.competition-preview-card:hover .competition-targets-preview {
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 40px rgba(0, 212, 255, 0.2);
+}
+
+.target-preview-item {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--gray-medium);
+    transition: background-color 0.3s ease;
+}
+
+.target-preview-item:last-child {
+    border-bottom: none;
+}
+
+.target-preview-item:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.target-ticker {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    margin-bottom: 0.25rem;
+}
+
+.target-name {
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.target-status {
+    font-size: 0.85rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.competition-preview-footer {
+    padding: 1rem;
+    background: var(--gray-dark);
+    border-radius: 0 0 16px 16px;
+    text-align: center;
+    border-top: 1px solid var(--gray-medium);
+}
+
+.competition-preview-footer .preview-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 51, 102, 0.1);
+    border: 1px solid rgba(255, 51, 102, 0.3);
+    border-radius: 20px;
+    color: var(--accent-magenta);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .competition-preview-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .competition-preview-content h2 {
+        font-size: 2rem;
+    }
+    
+    .competition-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
+
 /* Playbooks Section */
 .playbooks-section {
     background: var(--black);

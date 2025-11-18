@@ -235,6 +235,39 @@ function updateThemeIcon(theme, iconElement) {
     iconElement.textContent = theme === 'light' ? '🌙' : '☀️';
 }
 
+// Competition countdown on homepage
+function initCompetitionCountdown() {
+    const countdownElement = document.getElementById('competition-countdown');
+    if (!countdownElement) return;
+    
+    // Set collapse date (matches the competition page)
+    const collapseDate = new Date('2026-12-31T23:59:59').getTime();
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = collapseDate - now;
+        
+        if (distance < 0) {
+            countdownElement.textContent = "COLLAPSED";
+            return;
+        }
+        
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        
+        // Format: show days if > 0, otherwise show hours and minutes
+        if (days > 0) {
+            countdownElement.textContent = `${days}d ${hours}h`;
+        } else {
+            countdownElement.textContent = `${hours}h ${minutes}m`;
+        }
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 60000); // Update every minute
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
@@ -244,6 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPhilosophyCards();
     initParallax();
     loadFeaturedPosts();
+    initCompetitionCountdown();
     
     // Add some console logging for debugging
     console.log('MetaSPN Landing Page Loaded');
