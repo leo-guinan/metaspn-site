@@ -10,6 +10,17 @@
     --gray-light: #666666;
 }
 
+/* Light mode variables */
+:root[data-theme="light"] {
+    --black: #FFFFFF;
+    --white: #0D0D0D;
+    --gray-dark: #F5F5F5;
+    --gray-medium: #E0E0E0;
+    --gray-light: #666666;
+    --neon-blue: #0066CC;
+    --accent-magenta: #CC0033;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -22,6 +33,61 @@ body {
     color: var(--white);
     line-height: 1.6;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 1000;
+    background: rgba(13, 13, 13, 0.9);
+    border: 1px solid var(--gray-medium);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="light"] .theme-toggle {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--gray-medium);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    border-color: var(--neon-blue);
+}
+
+.theme-toggle-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-toggle-icon {
+    transform: rotate(15deg);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+    }
+    
+    .theme-toggle-icon {
+        font-size: 1.25rem;
+    }
 }
 
 .container {
@@ -62,6 +128,12 @@ body {
     background: rgba(13, 13, 13, 0.8);
     border-radius: 1rem;
     backdrop-filter: blur(10px);
+    transition: background-color 0.3s ease;
+}
+
+:root[data-theme="light"] .hero-content {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--gray-medium);
 }
 
 .hero-title {
@@ -185,10 +257,12 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
 .content-section {
     padding: 6rem 0;
     background: var(--black);
+    transition: background-color 0.3s ease;
 }
 
 .content-section.alt {
     background: var(--gray-dark);
+    transition: background-color 0.3s ease;
 }
 
 .section-header {
@@ -472,6 +546,7 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     text-align: center;
     position: relative;
     overflow: hidden;
+    transition: background 0.3s ease;
 }
 
 .join-section::before {
@@ -526,6 +601,7 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     padding: 6rem 0;
     background: var(--gray-dark);
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .signup-content {
@@ -1041,7 +1117,7 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--gray-medium);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
 }
 
@@ -1212,7 +1288,7 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--gray-medium);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     position: relative;
 }
 
@@ -1593,6 +1669,7 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     padding: 4rem 0;
     background: var(--gray-dark);
     border-top: 1px solid var(--gray-medium);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .footer-content {
