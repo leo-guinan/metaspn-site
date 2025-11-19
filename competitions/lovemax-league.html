@@ -469,12 +469,12 @@
     <nav class="blog-nav">
         <div class="container">
             <div class="nav-content">
-                <a href="index.html" class="logo">MetaSPN</a>
+                <a href="../index.html" class="logo">MetaSPN</a>
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="index.html#signup">Join League</a>
-                    <a href="index.html#sponsor">Sponsor</a>
-                    <a href="blog/index.html">Blog</a>
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#signup">Join League</a>
+                    <a href="../index.html#sponsor">Sponsor</a>
+                    <a href="../blog/index.html">Blog</a>
                 </div>
             </div>
         </div>
@@ -549,9 +549,9 @@
                 </div>
                 
                 <div class="stock-price" style="margin-bottom: 2rem;">
-                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$31.49</span>
-                    <span class="stock-price-change -0.28%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
-                        -0.28%
+                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$0.00</span>
+                    <span class="stock-price-change +0.00%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
+                        +0.00%
                     </span>
                 </div>
                 
@@ -588,9 +588,9 @@
                 </div>
                 
                 <div class="stock-price" style="margin-bottom: 2rem;">
-                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$3.51</span>
-                    <span class="stock-price-change -1.68%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
-                        -1.68%
+                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$0.00</span>
+                    <span class="stock-price-change +0.00%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
+                        +0.00%
                     </span>
                 </div>
                 
@@ -626,9 +626,9 @@
                 </div>
                 
                 <div class="stock-price" style="margin-bottom: 2rem;">
-                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$13.94</span>
-                    <span class="stock-price-change +0.50%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
-                        +0.50%
+                    <span style="font-size: 2rem; color: var(--white); font-weight: 700;">$$0.00</span>
+                    <span class="stock-price-change +0.00%_CLASS" style="font-size: 1.2rem; padding: 0.5rem 1rem; border-radius: 6px;">
+                        +0.00%
                     </span>
                 </div>
                 
@@ -921,36 +921,78 @@
                 `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
         
-        // Update countdowns every second
-        setInterval(() => {
-            // Main countdown
-            const mainCollapseDate = '2026-12-31T23:59:59'; // Will be replaced by script
-            if (mainCollapseDate !== '2026-12-31T23:59:59') {
-                updateCountdown(mainCollapseDate, 'main-countdown');
-                updateCountdown(mainCollapseDate, 'opportunity-countdown');
+        // Initialize countdowns when DOM is ready
+        function initCountdowns() {
+            // Main countdown - these will be replaced by the build script
+            const mainCollapseDate = '2026-12-31T23:59:59';
+            const target1Date = '2025-12-31T23:59:59';
+            const target2Date = '2026-06-30T23:59:59';
+            const target3Date = '2026-09-30T23:59:59';
+            
+            // Helper to check if date is valid (not a placeholder)
+            function isValidDate(dateStr) {
+                if (!dateStr) return false;
+                // Check if it's a valid ISO date string (format: YYYY-MM-DDTHH:mm:ss)
+                // If it matches this format, it was replaced correctly by the build script
+                const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/;
+                if (!dateRegex.test(dateStr)) {
+                    return false; // Not a valid ISO date format, likely still a placeholder
+                }
+                // Verify it's a valid date
+                const date = new Date(dateStr);
+                return !isNaN(date.getTime());
             }
             
-            // Individual target countdowns
-            const target1Date = 'TARGET_1_2026-12-31T23:59:59';
-            const target2Date = 'TARGET_2_2026-12-31T23:59:59';
-            const target3Date = 'TARGET_3_2026-12-31T23:59:59';
+            // Debug logging
+            console.log('🔍 Countdown dates:', {
+                main: mainCollapseDate,
+                mainValid: isValidDate(mainCollapseDate),
+                target1: target1Date,
+                target1Valid: isValidDate(target1Date),
+                target2: target2Date,
+                target2Valid: isValidDate(target2Date),
+                target3: target3Date,
+                target3Valid: isValidDate(target3Date)
+            });
             
-            if (target1Date && target1Date !== 'TARGET_1_2026-12-31T23:59:59') {
-                updateCountdown(target1Date, 'timer-1');
+            // Update function that runs every second
+            function updateAllCountdowns() {
+                // Main countdown
+                if (isValidDate(mainCollapseDate)) {
+                    const mainElement = document.getElementById('main-countdown');
+                    const oppElement = document.getElementById('opportunity-countdown');
+                    if (mainElement) updateCountdown(mainCollapseDate, 'main-countdown');
+                    if (oppElement) updateCountdown(mainCollapseDate, 'opportunity-countdown');
+                }
+                
+                // Individual target countdowns
+                if (isValidDate(target1Date)) {
+                    const el1 = document.getElementById('timer-1');
+                    if (el1) updateCountdown(target1Date, 'timer-1');
+                }
+                if (isValidDate(target2Date)) {
+                    const el2 = document.getElementById('timer-2');
+                    if (el2) updateCountdown(target2Date, 'timer-2');
+                }
+                if (isValidDate(target3Date)) {
+                    const el3 = document.getElementById('timer-3');
+                    if (el3) updateCountdown(target3Date, 'timer-3');
+                }
             }
-            if (target2Date && target2Date !== 'TARGET_2_2026-12-31T23:59:59') {
-                updateCountdown(target2Date, 'timer-2');
-            }
-            if (target3Date && target3Date !== 'TARGET_3_2026-12-31T23:59:59') {
-                updateCountdown(target3Date, 'timer-3');
-            }
-        }, 1000);
+            
+            // Initial update immediately
+            updateAllCountdowns();
+            
+            // Then update every second
+            setInterval(updateAllCountdowns, 1000);
+        }
         
-        // Initial update
-        setTimeout(() => {
-            const event = new Event('DOMContentLoaded');
-            document.dispatchEvent(event);
-        }, 100);
+        // Run when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initCountdowns);
+        } else {
+            initCountdowns();
+        }
     </script>
     
     <!-- Fathom - beautiful, simple website analytics -->

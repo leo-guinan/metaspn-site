@@ -168,12 +168,8 @@ function generateCompetitionPage(competitionData, template) {
   html = html.replace(/COMPETITION_SLUG/g, escapeHTML(slug))
   html = html.replace(/COMPETITION_NAME/g, escapeHTML(name))
   
-  // Replace collapse date
-  if (collapseDate) {
-    html = html.replace(/COLLAPSE_DATE/g, collapseDate)
-  }
-  
-  // Replace target data
+  // Replace target data FIRST (before general COLLAPSE_DATE replacement)
+  // This prevents TARGET_1_COLLAPSE_DATE from being partially replaced
   targets.forEach((target, index) => {
     const num = index + 1
     const changeClass = getChangeClass(target.changePercent)
@@ -188,7 +184,7 @@ function generateCompetitionPage(competitionData, template) {
     html = html.replace(new RegExp(`TARGET_${num}_MCAP`, 'g'), formatMarketCap(target.marketCap))
     html = html.replace(new RegExp(`TARGET_${num}_ANALYSIS`, 'g'), escapeHTML(target.analysis))
     
-    // Replace collapse timer dates
+    // Replace collapse timer dates (must happen before general COLLAPSE_DATE replacement)
     if (target.collapseTimer) {
       html = html.replace(new RegExp(`TARGET_${num}_COLLAPSE_DATE`, 'g'), target.collapseTimer)
     }
@@ -198,6 +194,11 @@ function generateCompetitionPage(competitionData, template) {
       html = html.replace(new RegExp(`TARGET_${num}_WHY_VULNERABLE`, 'g'), escapeHTML(target.whyVulnerable))
     }
   })
+  
+  // Replace general collapse date LAST (after all TARGET_X_COLLAPSE_DATE replacements)
+  if (collapseDate) {
+    html = html.replace(/COLLAPSE_DATE/g, collapseDate)
+  }
   
   return html
 }
