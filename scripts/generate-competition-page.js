@@ -1,4 +1,4 @@
-import {readFileSync, writeFileSync, mkdirSync} from 'fs'
+import {readFileSync, writeFileSync, mkdirSync, existsSync} from 'fs'
 import {join, dirname} from 'path'
 import {fileURLToPath} from 'url'
 import dotenv from 'dotenv'
@@ -126,8 +126,76 @@ async function fetchStockDataFromAlphaVantage(ticker, apiKey) {
   }
 }
 
+// Cache file path
+const getCachePath = () => join(rootDir, '.stock-cache.json')
+
+// Check if cache is valid (less than 24 hours old)
+function isCacheValid(cache) {
+  if (!cache || !cache.timestamp) return false
+  const cacheAge = Date.now() - cache.timestamp
+  const oneDay = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+  return cacheAge < oneDay
+}
+
+// Load cached stock data
+function loadCachedStockData() {
+  const cachePath = getCachePath()
+  if (!existsSync(cachePath)) {
+    return null
+  }
+  
+  try {
+    const cacheContent = readFileSync(cachePath, 'utf-8')
+    const cache = JSON.parse(cacheContent)
+    
+    if (isCacheValid(cache)) {
+      console.log('   📦 Using cached stock data (less than 24 hours old)')
+      return cache.data
+    } else {
+      console.log('   ⏰ Cache expired, fetching fresh data...')
+      return null
+    }
+  } catch (error) {
+    console.log(`   ⚠️  Error reading cache: ${error.message}`)
+    return null
+  }
+}
+
+// Save stock data to cache
+function saveStockDataToCache(data) {
+  const cachePath = getCachePath()
+  const cache = {
+    timestamp: Date.now(),
+    data: data
+  }
+  
+  try {
+    writeFileSync(cachePath, JSON.stringify(cache, null, 2), 'utf-8')
+    console.log('   💾 Stock data cached for 24 hours')
+  } catch (error) {
+    console.log(`   ⚠️  Error saving cache: ${error.message}`)
+  }
+}
+
 // Fetch stock data for all targets
 async function fetchAllStockData(targets, apiKey) {
+  // Try to load from cache first
+  const cachedData = loadCachedStockData()
+  if (cachedData) {
+    // Merge cached data with targets (preserve other target properties)
+    return targets.map(target => {
+      const cached = cachedData[target.ticker]
+      if (cached && cached.price && cached.price > 0) {
+        return {
+          ...target,
+          ...cached
+        }
+      }
+      return target
+    })
+  }
+  
+  // No valid cache, fetch from API
   if (!apiKey) {
     console.log('   ⚠️  No Alpha Vantage API key found, using manual data')
     return targets
@@ -137,11 +205,16 @@ async function fetchAllStockData(targets, apiKey) {
   console.log(`   API Key: ${apiKey ? `${apiKey.substring(0, 4)}...` : 'NOT SET'}`)
   
   const updatedTargets = []
+  const cacheData = {}
+  
   for (const target of targets) {
     try {
       const stockData = await fetchStockDataFromAlphaVantage(target.ticker, apiKey)
       
       if (stockData && stockData.price && stockData.price > 0) {
+        // Store in cache object
+        cacheData[target.ticker] = stockData
+        
         // Merge fetched data with existing target data (preserve company name, analysis, etc.)
         updatedTargets.push({
           ...target,
@@ -163,6 +236,11 @@ async function fetchAllStockData(targets, apiKey) {
     if (targets.indexOf(target) < targets.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 12000))
     }
+  }
+  
+  // Save to cache if we got any valid data
+  if (Object.keys(cacheData).length > 0) {
+    saveStockDataToCache(cacheData)
   }
   
   return updatedTargets

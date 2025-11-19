@@ -10,6 +10,7 @@ yarn.lock
 .sanity/
 dist/
 studio-dist/
+.stock-cache.json
 
 # OS
 .DS_Store
