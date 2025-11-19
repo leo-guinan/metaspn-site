@@ -217,17 +217,20 @@ function generateLandingPageWithFeaturedPosts(featuredPosts, template) {
   // Embed the data as JSON in a script tag
   const scriptTag = `<script type="application/json" id="featured-posts-data">${JSON.stringify(postsData)}</script>`
   
+  // Remove any existing featured-posts-data script tags first
+  let cleanedTemplate = template.replace(/<script[^>]*id="featured-posts-data"[^>]*>[\s\S]*?<\/script>/gi, '')
+  
   // Insert before the closing body tag or before the script.js include
   // Look for the script.js include and insert before it
-  if (template.includes('<script src="script.js"></script>')) {
-    return template.replace(
+  if (cleanedTemplate.includes('<script src="script.js"></script>')) {
+    return cleanedTemplate.replace(
       '<script src="script.js"></script>',
       `${scriptTag}\n    <script src="script.js"></script>`
     )
   }
   
   // Fallback: insert before closing body tag
-  return template.replace('</body>', `    ${scriptTag}\n</body>`)
+  return cleanedTemplate.replace('</body>', `    ${scriptTag}\n</body>`)
 }
 
 async function main() {

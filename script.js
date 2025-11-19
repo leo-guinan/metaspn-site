@@ -135,7 +135,7 @@ function initParallax() {
 function loadFeaturedPosts() {
     const container = document.getElementById('featured-posts-grid');
     if (!container) {
-        console.log('Featured posts container not found');
+        console.log('⚠️ Featured posts container not found - element may not exist on this page');
         return;
     }
 
@@ -143,22 +143,36 @@ function loadFeaturedPosts() {
         // Get embedded posts data from the page (injected during build)
         const dataScript = document.getElementById('featured-posts-data');
         if (!dataScript) {
-            console.log('No featured posts data found - posts will be generated during build');
+            console.log('⚠️ No featured posts data found - posts will be generated during build');
             container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">No posts available yet. Check back soon!</p>';
             return;
         }
 
         let posts;
         try {
-            posts = JSON.parse(dataScript.textContent);
+            const jsonText = dataScript.textContent || dataScript.innerHTML;
+            if (!jsonText || jsonText.trim() === '') {
+                console.error('❌ Featured posts data script is empty');
+                container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">No posts data available.</p>';
+                return;
+            }
+            posts = JSON.parse(jsonText);
         } catch (parseError) {
-            console.error('Error parsing featured posts JSON:', parseError);
+            console.error('❌ Error parsing featured posts JSON:', parseError);
+            console.error('   JSON content:', dataScript.textContent?.substring(0, 200));
             container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Error loading posts. Please refresh the page.</p>';
             return;
         }
 
+        if (!Array.isArray(posts)) {
+            console.error('❌ Featured posts data is not an array:', typeof posts);
+            container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">Invalid posts data format.</p>';
+            return;
+        }
+
         if (posts.length === 0) {
-            console.log('No featured posts found');
+            console.log('⚠️ No featured posts found in data');
+            container.innerHTML = '<p style="color: var(--gray-light); text-align: center;">No posts available yet.</p>';
             return;
         }
 
@@ -284,7 +298,7 @@ function initCompetitionCountdown() {
 }
 
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+function initializePage() {
     initThemeToggle();
     initScrollAnimations();
     animateScoreboard();
@@ -298,7 +312,15 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('MetaSPN Landing Page Loaded');
     console.log('ConvertKit form embed active');
     console.log('Featured posts functionality active');
-});
+}
+
+// Run when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePage);
+} else {
+    // DOM is already ready
+    initializePage();
+}
 
 // Add some utility functions
 function debounce(func, wait) {
