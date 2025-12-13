@@ -47,9 +47,36 @@ npx http-server
 ```
 .
 ├── index.html      # Main HTML file
+├── charter.html    # Internet 2.0 Charter page
 ├── styles.css      # All styles
 └── README.md       # This file
 ```
+
+## Analytics & Email Capture
+
+### Fathom Analytics
+
+Fathom Analytics is already configured with site ID `YDMELMTV`. The following events are tracked:
+
+- **Link Clicks**: All CTA buttons and navigation links
+- **Email Submissions**: Form submissions (success and error)
+
+### Email Form Setup (Formspree)
+
+The email capture form uses Formspree, which requires no API key and works with static sites.
+
+**Setup Steps:**
+
+1. Go to [formspree.io](https://formspree.io) and create a free account
+2. Create a new form (free tier allows 50 submissions/month)
+3. Copy your form endpoint URL (looks like `https://formspree.io/f/YOUR_FORM_ID`)
+4. In `index.html`, find the email form and replace `YOUR_FORM_ID` with your actual Formspree form ID:
+
+```html
+<form id="email-form" class="email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+```
+
+That's it! The form will now send emails to your Formspree account, and you'll receive notifications for each submission.
 
 ## Color System
 
