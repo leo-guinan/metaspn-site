@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* MetaSPN Landing Page Styles */
 
 :root {
@@ -21,12 +22,54 @@
     --accent-magenta: #CC0033;
 }
 
+=======
+/* ============================================
+   METASPN SEASON 1 — STYLESHEET
+   Minimal. Mythic. Serious. Human.
+   ============================================ */
+
+/* ============================================
+   COLOR SYSTEM
+   ============================================ */
+:root {
+    /* Primary Colors */
+    --obsidian-black: #0a0a0a;
+    --charcoal: #1a1a1a;
+    --bone: #f5f0e8;
+    --warm-off-white: #faf8f3;
+    
+    /* Accent Colors (use sparingly) */
+    --gold: #d4af37;
+    --deep-red: #8b0000;
+    
+    /* Typography */
+    --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+    --spacing-xl: 6rem;
+    --spacing-xxl: 8rem;
+    
+    /* Max Width */
+    --max-width: 800px;
+    --max-width-wide: 1200px;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+>>>>>>> 07acf76 (new version)
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--black);
@@ -100,11 +143,67 @@ body {
 }
 
 /* Hero Section */
+=======
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--bone);
+    background-color: var(--obsidian-black);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+}
+
+.lead {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+}
+
+.emphasis {
+    font-weight: 500;
+    color: var(--gold);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+>>>>>>> 07acf76 (new version)
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+<<<<<<< HEAD
     position: relative;
     background: var(--black);
     overflow: hidden;
@@ -112,11 +211,21 @@ body {
 }
 
 .hero-gradient {
+=======
+    background: linear-gradient(180deg, var(--obsidian-black) 0%, var(--charcoal) 100%);
+    position: relative;
+    padding: var(--spacing-lg);
+}
+
+.hero::before {
+    content: '';
+>>>>>>> 07acf76 (new version)
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+<<<<<<< HEAD
     background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 70% 80%, rgba(255, 51, 102, 0.05) 0%, transparent 50%);
     z-index: 1;
@@ -1625,10 +1734,350 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     font-size: 1.2rem;
     margin-bottom: 4rem;
     max-width: 600px;
+=======
+    background: radial-gradient(ellipse at center, transparent 0%, var(--obsidian-black) 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--bone);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--bone);
+    opacity: 0.7;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-lg);
+}
+
+.season-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--bone);
+    margin-top: var(--spacing-lg);
+    line-height: 1.4;
+}
+
+/* ============================================
+   MAIN CONTENT SECTIONS
+   ============================================ */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.content-section {
+    margin-bottom: var(--spacing-xxl);
+    position: relative;
+    padding-left: 4rem;
+}
+
+.section-number {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--gold);
+    opacity: 0.4;
+    font-weight: 400;
+}
+
+.section-content {
+    position: relative;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--bone);
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.02em;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin-top: var(--spacing-sm);
+    opacity: 0.6;
+}
+
+/* ============================================
+   LISTS
+   ============================================ */
+ul {
+    list-style: none;
+    margin-bottom: var(--spacing-md);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    opacity: 0.5;
+}
+
+.watching-list li::before,
+.problem-list li::before,
+.witness-list li::before,
+.help-list li::before,
+.matters-list li::before,
+.feel-list li::before {
+    content: '•';
+    color: var(--bone);
+    opacity: 0.4;
+}
+
+/* ============================================
+   ARENA SECTION
+   ============================================ */
+.arena-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) 0;
+}
+
+.arena-label {
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bone);
+}
+
+.arena-list {
+    margin-bottom: 0;
+}
+
+.arena-list li::before {
+    content: '—';
+    color: var(--deep-red);
+    opacity: 0.6;
+}
+
+/* ============================================
+   AVATARS SECTION
+   ============================================ */
+.avatars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md) 0;
+}
+
+.avatar-item {
+    text-align: center;
+    padding: var(--spacing-md);
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.avatar-item:hover {
+    border-color: var(--gold);
+    border-color: rgba(212, 175, 55, 0.2);
+}
+
+.avatar-sigil {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto var(--spacing-sm);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.3;
+    position: relative;
+}
+
+.avatar-sigil::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.avatar-name {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+}
+
+.avatar-function {
+    font-size: 0.9rem;
+    color: var(--bone);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.avatar-conclusion {
+    text-align: center;
+    margin-top: var(--spacing-lg);
+    font-size: 1.1rem;
+    color: var(--bone);
+}
+
+/* ============================================
+   WATCH SECTION
+   ============================================ */
+.watch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md) 0;
+}
+
+.watch-label {
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+    color: var(--bone);
+}
+
+.watch-list {
+    margin-bottom: 0;
+}
+
+.watch-list li::before {
+    content: '—';
+    color: var(--bone);
+    opacity: 0.4;
+}
+
+/* ============================================
+   CODE SECTION
+   ============================================ */
+.code-section {
+    background: var(--charcoal);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gold);
+    border-width: 1px 0;
+    margin: var(--spacing-xxl) 0;
+}
+
+.code-section .section-number {
+    color: var(--gold);
+    opacity: 0.6;
+}
+
+.code-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.code-item {
+    padding: var(--spacing-sm);
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--bone);
+    border: 1px solid transparent;
+    border-top: 1px solid var(--gold);
+    border-top-color: rgba(212, 175, 55, 0.2);
+    transition: border-color 0.3s ease;
+}
+
+.code-item:hover {
+    border-color: var(--gold);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.code-conclusion {
+    text-align: center;
+    margin-top: var(--spacing-md);
+    font-style: italic;
+    color: var(--bone);
+    opacity: 0.9;
+}
+
+/* ============================================
+   PHASE LIST
+   ============================================ */
+.phase-list {
+    margin: var(--spacing-md) 0;
+}
+
+.phase-list li {
+    margin-bottom: var(--spacing-sm);
+    padding-left: 0;
+}
+
+.phase-list li::before {
+    display: none;
+}
+
+.phase-list strong {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.cta-section {
+    margin-top: var(--spacing-xxl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--gold);
+    border-top-color: rgba(212, 175, 55, 0.3);
+}
+
+.final-line {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: var(--spacing-lg) 0;
+    color: var(--gold);
+    font-family: var(--font-serif);
+    font-weight: 500;
+}
+
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    max-width: 400px;
+>>>>>>> 07acf76 (new version)
     margin-left: auto;
     margin-right: auto;
 }
 
+<<<<<<< HEAD
 .pod-showcase {
     max-width: 1000px;
     margin: 0 auto;
@@ -2131,5 +2580,214 @@ a.cta-primary, a.cta-secondary, a.cta-tertiary {
     .social-link {
         width: 100%;
         text-align: center;
+=======
+.cta-primary,
+.cta-secondary,
+.cta-deep {
+    display: block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    color: var(--bone);
+    background: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cta-primary {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.cta-primary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.cta-secondary {
+    border-color: var(--bone);
+    border-color: rgba(245, 240, 232, 0.3);
+    color: var(--bone);
+    opacity: 0.8;
+}
+
+.cta-secondary:hover {
+    opacity: 1;
+    border-color: var(--bone);
+    background: rgba(245, 240, 232, 0.05);
+}
+
+.cta-deep {
+    border-color: var(--deep-red);
+    border-color: rgba(139, 0, 0, 0.4);
+    color: var(--bone);
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+.cta-deep:hover {
+    opacity: 1;
+    border-color: var(--deep-red);
+    background: rgba(139, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(139, 0, 0, 0.2);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    margin-top: var(--spacing-xxl);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid var(--charcoal);
+    border-top-color: rgba(245, 240, 232, 0.1);
+}
+
+.footer-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.footer p {
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+    color: var(--bone);
+    opacity: 0.6;
+}
+
+.footer-subtitle {
+    font-size: 0.8rem;
+    opacity: 0.4;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    :root {
+        --spacing-lg: 3rem;
+        --spacing-xl: 4rem;
+        --spacing-xxl: 5rem;
+    }
+    
+    .hero {
+        min-height: 80vh;
+        padding: var(--spacing-md);
+    }
+    
+    .logo {
+        font-size: 2.5rem;
+    }
+    
+    .season-title {
+        font-size: 1.4rem;
+    }
+    
+    main {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .content-section {
+        padding-left: 2.5rem;
+    }
+    
+    .section-number {
+        font-size: 1.5rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .arena-grid,
+    .watch-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .avatars-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .code-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 0.75rem;
+    }
+    
+    .season-title {
+        font-size: 1.2rem;
+    }
+    
+    .content-section {
+        padding-left: 2rem;
+    }
+    
+    .section-number {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.4rem;
+    }
+    
+    body {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.mt-lg {
+    margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .hero {
+        min-height: auto;
+        page-break-after: always;
+    }
+    
+    .cta-buttons {
+        display: none;
+>>>>>>> 07acf76 (new version)
     }
 }
