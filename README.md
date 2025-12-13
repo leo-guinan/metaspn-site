@@ -1,43 +1,3 @@
-<<<<<<< HEAD
-# MetaSPN Landing Page
-
-The Conscious League for Founders - Turning innovation into a spectator sport.
-
-## Features
-
-- **Hero Section**: Dark gradient background with main CTAs
-- **The Premise**: Scroll-triggered animations explaining the why
-- **Game Plan**: Two-column layout with animated scoreboard
-- **Week 1 Feature**: Essay excerpt with video placeholder
-- **Email Capture**: ConvertKit integration for league signups
-- **Sponsor Tiers**: Three-tier sponsorship structure
-- **Columbus Pod**: Season 1 startup showcase
-- **Live Scoreboard**: Experimental metrics widget
-- **Philosophy**: Expandable quote cards
-- **Responsive Design**: Mobile-first approach
-
-## Setup
-
-1. **ConvertKit Form Setup:**
-   - Create a form in ConvertKit
-   - Get your form's POST URL (not the embed code)
-   - Replace `https://your-form-url.convertkit.com` in `script.js` with your actual form URL
-   - The form will submit directly to ConvertKit (no API keys exposed)
-
-2. **Deploy to GitHub Pages or any static hosting service**
-
-3. **Test the email capture functionality**
-
-## Design System
-
-- **Colors**: Black (#0D0D0D), Neon Blue (#00D4FF), White (#FFFFFF), Accent Magenta (#FF3366)
-- **Fonts**: Montserrat Bold (headings), Inter Regular (body)
-- **Animations**: Smooth scroll parallax, scoreboard number animations
-
-## Deployment
-
-This site is configured for GitHub Pages deployment. Simply push to the main branch and enable GitHub Pages in repository settings.
-=======
 # MetaSPN Season 1 Landing Page
 
 A minimal, mythic landing page for MetaSPN Season 1: The Search for Heroes.
@@ -106,4 +66,3 @@ npx http-server
 ## Browser Support
 
 Modern browsers (Chrome, Firefox, Safari, Edge). No polyfills or fallbacks needed for the minimal feature set.
->>>>>>> 07acf76 (new version)
