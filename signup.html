@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter the Arena — MetaSPN</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Fathom Analytics -->
+    <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero signup-hero">
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="images/optimized/logo.jpg" alt="MetaSPN" class="logo-image" loading="eager" width="120" height="120">
+                <h1 class="logo">ENTER THE ARENA</h1>
+                <p class="subtitle">META-SPN</p>
+            </div>
+            <h2 class="season-title" id="signup-subtitle">Accept Your Invitation</h2>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Signup Form -->
+        <section class="content-section signup-section">
+            <div class="section-content">
+                <h2 class="section-title">ACCEPT THE INVITATION</h2>
+                <p>This is a threshold, not a signup form.</p>
+                <p>By submitting, you commit to entering the Arena as <strong id="archetype-display"></strong>.</p>
+                
+                <form id="signup-form" class="signup-form" action="https://formspree.io/f/mnnewyzq" method="POST">
+                    <!-- Hidden fields for tracking -->
+                    <input type="hidden" name="_subject" value="MetaSPN Arena Entry">
+                    <input type="hidden" name="_format" value="plain">
+                    <input type="hidden" name="archetype" id="archetype-field">
+                    <input type="hidden" name="season" id="season-field">
+                    <input type="hidden" name="ref" id="ref-field">
+                    <input type="hidden" name="inviter" id="inviter-field">
+                    
+                    <!-- Visible form fields -->
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" name="name" id="name" class="form-input" placeholder="Your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" name="email" id="email" class="form-input" placeholder="your@email.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="archetype-confirm" class="form-label">Archetype</label>
+                        <div class="archetype-display-box" id="archetype-display-box">
+                            <span id="archetype-name-display"></span>
+                        </div>
+                        <p class="form-help">This was set from your invitation. If incorrect, please use the original invitation link.</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="commitment" class="form-label">Commitment Statement</label>
+                        <textarea name="commitment" id="commitment" class="form-textarea" rows="4" placeholder="In one sentence, what are you committing to by entering the Arena?" required></textarea>
+                        <p class="form-help">This is not a test. Be honest about what you're stepping into.</p>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="agreement" id="agreement" required>
+                            <span>I understand that entering the Arena means doing real work in public, receiving feedback without defensiveness, and being judged on trajectory, not performance art.</span>
+                        </label>
+                    </div>
+                    
+                    <div id="form-message" class="form-message" style="display: none;"></div>
+                    
+                    <button type="submit" class="form-submit" id="submit-button">
+                        Enter the Arena
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- What Happens Next -->
+        <section class="content-section">
+            <div class="section-number">I</div>
+            <div class="section-content">
+                <h2 class="section-title">WHAT HAPPENS NEXT</h2>
+                <p>After you submit:</p>
+                <ul class="charter-list">
+                    <li>You will receive a confirmation email</li>
+                    <li>You'll be added to the Season <span id="season-display"></span> Arena</li>
+                    <li>Training Camp details will be sent within 48 hours</li>
+                    <li>The Arena opens publicly</li>
+                </ul>
+                <p class="emphasis">There is no going back once you enter.</p>
+                <p>This is by design.</p>
+            </div>
+        </section>
+
+        <!-- The Threshold -->
+        <section class="content-section closing-section">
+            <div class="section-content">
+                <h2 class="section-title">THE THRESHOLD</h2>
+                <p>You are about to cross from observer to participant.</p>
+                <p>From private work to public accountability.</p>
+                <p>From potential to proof.</p>
+                <p class="emphasis">If you are not ready, do not submit.</p>
+                <p>If you are ready, step forward.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>MetaSPN — The Conscious League</p>
+            <p class="footer-subtitle">Enter the Arena</p>
+        </div>
+    </footer>
+
+    <!-- Form Handling Script -->
+    <script>
+        // Archetype data (matching invite page)
+        const archetypes = {
+            seeker: { name: "The Seeker", slug: "seeker" },
+            forgeheart: { name: "The Forgeheart", slug: "forgeheart" },
+            mirrorbearer: { name: "The Mirrorbearer", slug: "mirrorbearer" },
+            pathfinder: { name: "The Pathfinder", slug: "pathfinder" },
+            challenger: { name: "The Challenger", slug: "challenger" },
+            architect: { name: "The Architect", slug: "architect" },
+            catalyst: { name: "The Catalyst", slug: "catalyst" },
+            resonant: { name: "The Resonant", slug: "resonant" },
+            sentinel: { name: "The Sentinel", slug: "sentinel" },
+            steward: { name: "The Steward", slug: "steward" }
+        };
+
+        // Get URL parameters
+        function getURLParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                archetype: params.get('archetype') || params.get('a') || null,
+                season: params.get('season') || params.get('s') || '1',
+                ref: params.get('ref') || params.get('r') || null,
+                inviter: params.get('inviter') || params.get('i') || null
+            };
+        }
+
+        // Populate form from URL parameters
+        function populateForm() {
+            const params = getURLParams();
+            
+            // Set archetype
+            if (params.archetype) {
+                const archetypeKey = params.archetype.toLowerCase();
+                const archetype = archetypes[archetypeKey];
+                
+                if (archetype) {
+                    document.getElementById('archetype-field').value = archetype.name;
+                    document.getElementById('archetype-display').textContent = archetype.name;
+                    document.getElementById('archetype-name-display').textContent = archetype.name;
+                } else {
+                    // Invalid archetype, show error
+                    document.getElementById('archetype-display').textContent = 'Unknown';
+                    document.getElementById('archetype-name-display').textContent = 'Invalid Archetype';
+                }
+            } else {
+                // No archetype provided
+                document.getElementById('archetype-display').textContent = 'Not Specified';
+                document.getElementById('archetype-name-display').textContent = 'Please use invitation link';
+                document.getElementById('archetype-display-box').classList.add('error');
+            }
+            
+            // Set season
+            document.getElementById('season-field').value = params.season;
+            document.getElementById('season-display').textContent = params.season;
+            
+            // Set ref and inviter
+            if (params.ref) {
+                document.getElementById('ref-field').value = params.ref;
+            }
+            if (params.inviter) {
+                document.getElementById('inviter-field').value = params.inviter;
+            }
+            
+            // Update subtitle if archetype is set
+            if (params.archetype && archetypes[params.archetype.toLowerCase()]) {
+                const archetype = archetypes[params.archetype.toLowerCase()];
+                document.getElementById('signup-subtitle').textContent = `Accept Your Invitation as ${archetype.name}`;
+            }
+        }
+
+        // Handle form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            populateForm();
+            
+            const form = document.getElementById('signup-form');
+            const formMessage = document.getElementById('form-message');
+            const submitButton = document.getElementById('submit-button');
+            
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const originalText = submitButton.textContent;
+                
+                // Disable button
+                submitButton.disabled = true;
+                submitButton.textContent = 'Entering...';
+                formMessage.style.display = 'none';
+                
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Success
+                        formMessage.textContent = 'You have entered the Arena. Check your email for confirmation.';
+                        formMessage.className = 'form-message success';
+                        formMessage.style.display = 'block';
+                        form.reset();
+                        
+                        // Track success
+                        if (window.fathom) {
+                            const archetype = document.getElementById('archetype-field').value;
+                            window.fathom.trackEvent(`Signup - Success - ${archetype}`);
+                        }
+                        
+                        // Scroll to message
+                        formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        // Error
+                        throw new Error('Submission failed');
+                    }
+                } catch (error) {
+                    // Error handling
+                    formMessage.textContent = 'Something went wrong. Please try again or contact support.';
+                    formMessage.className = 'form-message error';
+                    formMessage.style.display = 'block';
+                    
+                    // Track error
+                    if (window.fathom) {
+                        window.fathom.trackEvent('Signup - Error');
+                    }
+                    
+                    // Scroll to message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } finally {
+                    // Re-enable button
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

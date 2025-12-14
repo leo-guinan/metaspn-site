@@ -322,9 +322,15 @@
             document.getElementById('season-number-4').textContent = seasonNumber;
             document.getElementById('season-title').textContent = seasonTitle;
 
-            // Update CTA link (you can customize this)
+            // Update CTA link to signup page
             const ctaLink = document.getElementById('accept-cta');
-            ctaLink.href = `#accept?archetype=${archetypeKey}&season=${seasonNumber}`;
+            const urlParams = getURLParams();
+            const signupParams = new URLSearchParams();
+            signupParams.set('archetype', archetypeKey);
+            signupParams.set('season', seasonNumber);
+            if (urlParams.ref) signupParams.set('ref', urlParams.ref);
+            if (urlParams.inviter) signupParams.set('inviter', urlParams.inviter);
+            ctaLink.href = `signup.html?${signupParams.toString()}`;
             
             // Track invitation view
             if (window.fathom) {
