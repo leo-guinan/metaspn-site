@@ -209,6 +209,7 @@ main {
     width: 3.5rem;
     text-align: right;
     padding-right: 1rem;
+    position: relative;
 }
 
 .section-content {
