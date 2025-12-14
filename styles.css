@@ -124,6 +124,17 @@ p {
     max-width: 600px;
 }
 
+.logo-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-sm);
+    display: block;
+    opacity: 0.95;
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
 .logo {
     font-family: var(--font-serif);
     font-size: 4rem;
@@ -308,26 +319,19 @@ li::before {
 }
 
 .avatar-sigil {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto var(--spacing-sm);
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    opacity: 0.3;
-    position: relative;
+    display: block;
+    object-fit: contain;
+    opacity: 0.8;
+    filter: brightness(0.9) contrast(1.1);
+    transition: all 0.3s ease;
 }
 
-.avatar-sigil::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    opacity: 0.5;
+.avatar-item:hover .avatar-sigil {
+    opacity: 1;
+    filter: brightness(1) contrast(1.2) drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
 }
 
 .avatar-name {
@@ -682,6 +686,11 @@ li::before {
         padding: var(--spacing-md);
     }
     
+    .logo-image {
+        width: 80px;
+        height: 80px;
+    }
+    
     .logo {
         font-size: 2.5rem;
     }
@@ -747,8 +756,18 @@ li::before {
 }
 
 @media (max-width: 480px) {
+    .logo-image {
+        width: 60px;
+        height: 60px;
+    }
+    
     .logo {
         font-size: 2rem;
+    }
+    
+    .avatar-sigil {
+        width: 60px;
+        height: 60px;
     }
     
     .subtitle {
