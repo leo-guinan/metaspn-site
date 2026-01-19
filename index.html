@@ -3,409 +3,778 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MetaSPN Season 1: The Search for Heroes</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>MetaSPN – See the games you play online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Fathom Analytics -->
-    <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #f5f5f0;
+            --fg-dim: #c4c4bc;
+            --gold: #d4af37;
+            --gold-light: #f4cf57;
+            --gold-dark: #b4941f;
+            --red: #c41e3a;
+            --red-dark: #8b1528;
+            --grid: #1a1612;
+            --border: #2a2520;
+            --cream: #faf8f3;
+            --mono: 'JetBrains Mono', monospace;
+            --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Subtle warm grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+                linear-gradient(var(--grid) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Ambient gold glow effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .logo {
+            display: inline-block;
+        }
+
+        .logo img {
+            height: 2.5rem;
+            width: auto;
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 0 4rem;
+            position: relative;
+        }
+
+        .hero-label {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.1;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 .highlight {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            animation: fadeInUp 0.6s ease 0.1s forwards;
+            opacity: 0;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            color: var(--fg-dim);
+            animation: fadeInUp 0.6s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 3rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+        }
+
+        .game-card {
+            background: var(--bg);
+            padding: 2.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            background: #111;
+            transform: translateY(-2px);
+        }
+
+        .game-card::before {
+            content: attr(data-number);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-family: var(--mono);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--grid);
+            line-height: 1;
+        }
+
+        .game-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .game-card.platform h3 { color: var(--red); }
+        .game-card.ai h3 { color: #9d7cd8; }
+        .game-card.creator h3 { color: var(--gold); }
+
+        .game-card p {
+            color: var(--fg-dim);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .game-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .game-card li {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: #8a8a80;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .game-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold-dark);
+        }
+
+        /* Insight Section */
+        .insight-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.03) 0%, #0d0d0d 100%);
+            border: 1px solid var(--border);
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .insight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold) 0%, var(--gold-dark) 100%);
+        }
+
+        .insight-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .insight-box p {
+            font-size: 1.1rem;
+            color: var(--fg-dim);
+            line-height: 1.8;
+        }
+
+        /* Stats Statement */
+        .stats-statement {
+            text-align: center;
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 3rem auto;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stat-highlight {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            line-height: 1.7;
+            color: var(--fg-dim);
+        }
+
+        .accent-text {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .solution-intro {
+            max-width: 700px;
+            margin-bottom: 4rem;
+        }
+
+        .solution-intro h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .solution-intro p {
+            font-size: 1.15rem;
+            color: var(--fg-dim);
+            line-height: 1.8;
+        }
+
+        .game-audit-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, #0a0a0a 100%);
+            border: 2px solid var(--gold);
+            padding: 4rem;
+            position: relative;
+            margin-bottom: 3rem;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+        }
+
+        .game-audit-card::after {
+            content: 'GAME 01';
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        .game-audit-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-audit-card .subtitle {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            color: var(--gold-dark);
+            margin-bottom: 2rem;
+        }
+
+        .game-audit-card p {
+            color: var(--fg-dim);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .feature-item {
+            border-left: 2px solid var(--gold);
+            padding-left: 1.5rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--cream);
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #9a9a90;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .cta-box {
+            background: var(--bg);
+            border: 2px solid var(--gold);
+            padding: 4rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(135deg, var(--gold) 0%, transparent 100%);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            color: var(--fg-dim);
+            margin-bottom: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button, a.button {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            padding: 1rem 2rem;
+            border: 2px solid var(--gold);
+            background: var(--bg);
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::before, a.button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        button:hover, a.button:hover {
+            background: var(--gold);
+            color: var(--bg);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        button:hover::before, a.button:hover::before {
+            left: 100%;
+        }
+
+        button.secondary, a.button.secondary {
+            border-color: var(--border);
+            color: var(--cream);
+        }
+
+        button.secondary:hover, a.button.secondary:hover {
+            background: var(--cream);
+            color: var(--bg);
+            border-color: var(--cream);
+            box-shadow: 0 8px 30px rgba(245, 245, 240, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: #6a6a60;
+            text-decoration: none;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        footer .logo img {
+            height: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 4rem 0 2rem;
+            }
+
+            .problem-section,
+            .insight-section,
+            .solution-section,
+            .cta-section {
+                padding: 3rem 0;
+            }
+
+            .game-card,
+            .insight-box,
+            .game-audit-card,
+            .cta-box {
+                padding: 2rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button, a.button {
+                width: 100%;
+            }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="logo-container">
-                <img src="images/optimized/logo.jpg" alt="MetaSPN" class="logo-image" loading="eager" width="120" height="120">
-                <h1 class="logo">METASPN</h1>
-                <p class="subtitle">THE CONSCIOUS LEAGUE</p>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="MetaSPN">
             </div>
-            <h2 class="season-title">Season 1: The Search for Heroes</h2>
         </div>
-    </section>
+    </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Introduction -->
-        <section class="content-section">
-            <div class="section-number">I</div>
-            <div class="section-content">
-                <h2 class="section-title">THE SEARCH FOR HEROES</h2>
-                <p class="lead">The world needs heroes.<br>MetaSPN is where they're forged.</p>
-                <p>This isn't a show.<br>It's a public arena where humans are tested by reality — not algorithms.</p>
-                <p>Season 1 is the first live experiment of Internet 2.0.</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-label">Observable Games Network</div>
+                <h1>See the <span class="highlight">games</span> you play online</h1>
+                <p class="hero-description">
+                    Most creators lose because they can't see which game they're in. The platforms see it. The AI companies see it. You should too.
+                </p>
             </div>
         </section>
 
-        <!-- What You're Really Watching -->
-        <section class="content-section">
-            <div class="section-number">II</div>
-            <div class="section-content">
-                <h2 class="section-title">⚡ WHAT YOU'RE REALLY WATCHING</h2>
-                <p class="lead">You are not watching content.</p>
-                <p>You are watching:</p>
-                <ul class="watching-list">
-                    <li>people learn under pressure</li>
-                    <li>ideas collide with reality</li>
-                    <li>systems either work — or fail in public</li>
-                    <li>humans grow in real time</li>
-                </ul>
-                <p>Most of the internet is optimized for looking impressive.</p>
-                <p class="emphasis">MetaSPN is optimized for becoming capable.</p>
-            </div>
-        </section>
-
-        <!-- Why This Exists -->
-        <section class="content-section">
-            <div class="section-number">III</div>
-            <div class="section-content">
-                <h2 class="section-title">🌍 WHY THIS EXISTS</h2>
-                <p>The internet taught people how to get attention.<br>It forgot how to recognize potential.</p>
-                <p>Today:</p>
-                <ul class="problem-list">
-                    <li>Great ideas die quietly</li>
-                    <li>Loud voices dominate</li>
-                    <li>Credentials outlive competence</li>
-                    <li>Opportunity flows toward optics</li>
-                </ul>
-                <p>MetaSPN replaces attention with feedback so opportunity can finally find people.</p>
-                <p class="emphasis">This is Internet 2.0:</p>
-                <p>A network that actually sees humans — not their data.</p>
-            </div>
-        </section>
-
-        <!-- The Arena -->
-        <section class="content-section">
-            <div class="section-number">IV</div>
-            <div class="section-content">
-                <h2 class="section-title">🏛 THE ARENA</h2>
-                <p class="lead">The Arena is where illusions end.</p>
-                <div class="arena-grid">
-                    <div class="arena-column">
-                        <p class="arena-label">There are:</p>
-                        <ul class="arena-list">
-                            <li>no follower counts</li>
-                            <li>no resumes</li>
-                            <li>no "personal brands"</li>
-                        </ul>
-                    </div>
-                    <div class="arena-column">
-                        <p class="arena-label">Only:</p>
-                        <ul class="arena-list">
-                            <li>what someone builds</li>
-                            <li>how they respond to feedback</li>
-                            <li>how fast they improve</li>
-                            <li>how responsibly they act</li>
-                        </ul>
-                    </div>
-                </div>
-                <p>Everything happens in public.</p>
-                <p>Not to entertain you —<br>but so the future can be selected out loud.</p>
-            </div>
-        </section>
-
-        <!-- The Avatars -->
-        <section class="content-section">
-            <div class="section-number">V</div>
-            <div class="section-content">
-                <h2 class="section-title">🧬 THE AVATARS (HOW HEROES ARE FORMED)</h2>
-                <p>Season 1 follows ten functional avatars — not personalities.</p>
-                <p>Each represents a role the future requires.</p>
-                <div class="avatars-grid">
-                    <div class="avatar-item">
-                        <img src="images/optimized/seeker-sigil.jpg" alt="The Seeker" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Seeker</h3>
-                        <p class="avatar-function">finds the real question</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/forgeheart-sigil.jpg" alt="The Forgeheart" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Forgeheart</h3>
-                        <p class="avatar-function">builds discipline</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/mirrorbearer-sigil.jpg" alt="The Mirrorbearer" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Mirrorbearer</h3>
-                        <p class="avatar-function">reveals truth</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/pathfinder-sigil.jpg" alt="The Pathfinder" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Pathfinder</h3>
-                        <p class="avatar-function">opens new paths</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/challenger-sigil.jpg" alt="The Challenger" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Challenger</h3>
-                        <p class="avatar-function">enters the arena</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/architect-sigil.jpg" alt="The Architect" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Architect</h3>
-                        <p class="avatar-function">builds systems</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/catalyst-sigil.jpg" alt="The Catalyst" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Catalyst</h3>
-                        <p class="avatar-function">ignites momentum</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/resonant-sigil.jpg" alt="The Resonant" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Resonant</h3>
-                        <p class="avatar-function">makes truth travel</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/sentinel-sigil.jpg" alt="The Sentinel" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Sentinel</h3>
-                        <p class="avatar-function">holds the line</p>
-                    </div>
-                    <div class="avatar-item">
-                        <img src="images/optimized/steward-sigil.jpg" alt="The Steward" class="avatar-sigil" loading="lazy" width="80" height="80">
-                        <h3 class="avatar-name">The Steward</h3>
-                        <p class="avatar-function">protects the future</p>
-                    </div>
-                </div>
-                <p class="avatar-conclusion">No one wins by playing all of them.<br>Heroes emerge by owning one deeply.</p>
-            </div>
-        </section>
-
-        <!-- Your Role as a Fan -->
-        <section class="content-section">
-            <div class="section-number">VI</div>
-            <div class="section-content">
-                <h2 class="section-title">👁 YOUR ROLE AS A FAN</h2>
-                <p class="lead">You are not here to cheer.</p>
-                <p>You are here to witness.</p>
-                <p>In Internet 2.0:</p>
-                <ul class="witness-list">
-                    <li>spectators help surface signal</li>
-                    <li>reflection replaces applause</li>
-                    <li>pattern recognition replaces hype</li>
-                </ul>
-                <p>By watching closely, you help:</p>
-                <ul class="help-list">
-                    <li>sharpen performance</li>
-                    <li>identify real growth</li>
-                    <li>carry clarity into the world</li>
-                </ul>
-                <p class="emphasis">You are part of the loop.</p>
-            </div>
-        </section>
-
-        <!-- How to Watch -->
-        <section class="content-section">
-            <div class="section-number">VII</div>
-            <div class="section-content">
-                <h2 class="section-title">🧭 HOW TO WATCH (AND NOT MISS THE SIGNAL)</h2>
-                <div class="watch-grid">
-                    <div class="watch-column">
-                        <p class="watch-label">Don't look for:</p>
-                        <ul class="watch-list">
-                            <li>polish</li>
-                            <li>confidence</li>
-                            <li>viral moments</li>
-                        </ul>
-                    </div>
-                    <div class="watch-column">
-                        <p class="watch-label">Look for:</p>
-                        <ul class="watch-list">
-                            <li>behavior changing week to week</li>
-                            <li>feedback being integrated</li>
-                            <li>responsibility being taken</li>
-                            <li>ideas surviving contact with reality</li>
-                        </ul>
-                    </div>
-                </div>
-                <p>The real story is never the loudest moment.<br>It's the trajectory.</p>
-            </div>
-        </section>
-
-        <!-- The Active Spectator Code -->
-        <section class="content-section code-section">
-            <div class="section-number">VIII</div>
-            <div class="section-content">
-                <h2 class="section-title">📜 THE ACTIVE SPECTATOR CODE</h2>
-                <p>This is how fans participate without breaking the Arena:</p>
-                <div class="code-grid">
-                    <div class="code-item">Signal over spectacle</div>
-                    <div class="code-item">Patterns over personalities</div>
-                    <div class="code-item">Reflection over advice</div>
-                    <div class="code-item">Precision over praise</div>
-                    <div class="code-item">Growth over moments</div>
-                    <div class="code-item">Responsibility over reaction</div>
-                </div>
-                <p class="code-conclusion">If your participation doesn't help someone grow — pause.</p>
-            </div>
-        </section>
-
-        <!-- What Makes Season 1 Different -->
-        <section class="content-section">
-            <div class="section-number">IX</div>
-            <div class="section-content">
-                <h2 class="section-title">🔥 WHAT MAKES SEASON 1 DIFFERENT</h2>
-                <p>Season 1 isn't a launch.<br>It's a search.</p>
-                <p>Some participants are known.<br>Most heroes aren't — yet.</p>
-                <p>You are watching:</p>
-                <ul class="watching-list">
-                    <li>talent separate itself from the pack</li>
-                    <li>systems reveal who they favor</li>
-                    <li>the future get drafted in public</li>
-                </ul>
-                <p class="emphasis">This is what selection looks like without algorithms.</p>
-            </div>
-        </section>
-
-        <!-- What Comes Next -->
-        <section class="content-section">
-            <div class="section-number">X</div>
-            <div class="section-content">
-                <h2 class="section-title">⏳ WHAT COMES NEXT</h2>
-                <p>Season 1 unfolds in phases:</p>
-                <ul class="phase-list">
-                    <li><strong>Training Camp</strong> — skill, clarity, pressure</li>
-                    <li><strong>Idea Factory Rollouts</strong> — real systems deployed</li>
-                    <li><strong>Public Observation</strong> — feedback, reflection, pattern recognition</li>
-                    <li><strong>The Draft</strong> — opportunity flows toward performance</li>
-                </ul>
-                <p>No applications.<br>No auditions.<br>Reality decides.</p>
-            </div>
-        </section>
-
-        <!-- Why This Matters -->
-        <section class="content-section">
-            <div class="section-number">XI</div>
-            <div class="section-content">
-                <h2 class="section-title">🏁 WHY THIS MATTERS</h2>
-                <p>The future doesn't arrive evenly.</p>
-                <p>It arrives through people who:</p>
-                <ul class="matters-list">
-                    <li>build what works</li>
-                    <li>take responsibility</li>
-                    <li>learn faster than the world changes</li>
-                    <li>leave things better than they found them</li>
-                </ul>
-                <p>MetaSPN exists to make those people visible.</p>
-                <p class="emphasis">Season 1 is the beginning.</p>
-            </div>
-        </section>
-
-        <!-- Join the Arena -->
-        <section class="content-section cta-section">
-            <div class="section-number">XII</div>
-            <div class="section-content">
-                <h2 class="section-title">👋 JOIN THE ARENA (AS A FAN)</h2>
-                <p>If you've ever felt:</p>
-                <ul class="feel-list">
-                    <li>bored by content</li>
-                    <li>suspicious of hype</li>
-                    <li>frustrated by shallow systems</li>
-                    <li>hungry for something real</li>
-                </ul>
-                <p class="emphasis">You're in the right place.</p>
-                <p>Follow along.<br>Watch closely.<br>Reflect honestly.<br>Share responsibly.</p>
-                <p class="final-line">The search for heroes has begun.</p>
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="container">
+                <div class="section-label">— The Invisible Games</div>
                 
-                <!-- Email Capture Form -->
-                <div class="email-form-container">
-                    <form id="email-form" class="email-form" action="https://formspree.io/f/mnnewyzq" method="POST">
-                        <input type="email" name="email" id="email-input" class="email-input" placeholder="Enter your email" required>
-                        <button type="submit" class="email-submit">Enter as a Spectator</button>
-                        <div id="form-message" class="email-form-message" style="display: none;"></div>
-                    </form>
-                    <p class="email-note">Join the Arena. No spam. Just updates.</p>
+                <div class="games-grid reveal">
+                    <div class="game-card platform" data-number="01">
+                        <h3>The Platform's Game</h3>
+                        <p>Platforms optimize for attention and engagement. They want you scrolling, clicking, reacting.</p>
+                        <ul>
+                            <li>Maximize time on platform</li>
+                            <li>Harvest behavioral data</li>
+                            <li>Keep you dependent</li>
+                        </ul>
+                    </div>
+
+                    <div class="game-card ai" data-number="02">
+                        <h3>The AI Company's Game</h3>
+                        <p>AI tools promise leverage but optimize for their own metrics, not yours.</p>
+                        <ul>
+                            <li>Extract your creative process</li>
+                            <li>Train on your output</li>
+                            <li>Commoditize your voice</li>
+                        </ul>
+                    </div>
+
+                    <div class="game-card creator" data-number="03">
+                        <h3>Your Game (Maybe)</h3>
+                        <p>You're trying to build trust, deliver value, create leverage. But are you optimizing for the right signals?</p>
+                        <ul>
+                            <li>Building real relationships?</li>
+                            <li>Creating compounding value?</li>
+                            <li>Or just feeding algorithms?</li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Insight Section -->
+        <section class="insight-section">
+            <div class="container">
+                <div class="section-label">— The Core Problem</div>
                 
-                <div class="cta-buttons">
-                    <a href="https://metaspn.metalabel.com/season_1?retryCount=1&variantId=2" class="cta-secondary" data-fathom-event="CTA - Watch Arena">Learn How to Watch the Arena</a>
-                    <a href="charter.html" class="cta-deep" data-fathom-event="CTA - Read Charter">Read the Internet 2.0 Charter</a>
+                <div class="insight-box reveal">
+                    <h2>You can't win a game you can't see</h2>
+                    <p>
+                        Most creators publish consistently, get decent feedback, and still see no momentum. Not because they lack skill or effort—but because they're playing one game with the rules of another.
+                    </p>
+                    <p style="margin-top: 1.5rem;">
+                        The platforms know which game you're in. The AI companies know which game you're in. But you're operating blind, mixing rules, breaking leverage, and wondering why nothing compounds.
+                    </p>
+                </div>
+
+                <div class="stats-statement reveal">
+                    <p class="stat-highlight">
+                        There are <span class="accent-text">6 core creator games</span>. 
+                        Most creators unknowingly mix <span class="accent-text">3-4 of them</span>. 
+                        You only need to master <span class="accent-text">one</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="solution-section">
+            <div class="container">
+                <div class="section-label">— MetaSPN Makes Games Observable</div>
+                
+                <div class="solution-intro reveal">
+                    <h2>First, you need to see which game you're actually playing</h2>
+                    <p>
+                        MetaSPN is building the infrastructure to make online games visible, measurable, and winnable. We're starting with creators—the people most vulnerable to game confusion.
+                    </p>
+                </div>
+
+                <div class="game-audit-card reveal">
+                    <h3>The Creator Game Audit</h3>
+                    <div class="subtitle">Powered by MetaSPN</div>
+                    
+                    <p>
+                        A structural diagnostic that identifies which content game you're playing, why it's not working, and what to fix.
+                    </p>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <h4>Game Identification</h4>
+                            <p>Which of the 6 creator games are you actually playing?</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Failure Mode Analysis</h4>
+                            <p>Why your current strategy isn't creating leverage</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Alignment Guardrails</h4>
+                            <p>Constraints your AI and VAs must follow to stay on-game</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Observable Metrics</h4>
+                            <p>The actual scoreboard for your specific game</p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 2rem; font-size: 1.05rem; color: var(--fg);">
+                        This is game one. The first observable game in the MetaSPN network.
+                    </p>
+                </div>
+
+                <div class="insight-box reveal">
+                    <h2>Why this matters now</h2>
+                    <p>
+                        AI tools accelerate output. Platforms accelerate distribution. But neither accelerates understanding. When you can't see which game you're in, speed just amplifies confusion.
+                    </p>
+                    <p style="margin-top: 1.5rem;">
+                        MetaSPN gives you what the platforms and AI companies already have: a clear view of the games being played. Once you see your game, everything else simplifies.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box reveal">
+                    <h2>Start with the Creator Game Audit</h2>
+                    <p>
+                        Limited founding rate: $3,000 for the first 5 clients<br>
+                        (Regular rate: $5,000)
+                    </p>
+                    <div class="button-group">
+                        <a href="#" class="button">Request Audit</a>
+                        <a href="#" class="button secondary">Take Free Quiz</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>MetaSPN — The Conscious League</p>
-            <p class="footer-subtitle">Season 1: The Search for Heroes</p>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="MetaSPN">
+                </div>
+                <div class="footer-links">
+                    <a href="#">About</a>
+                    <a href="#">Framework</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Analytics and Form Handling -->
     <script>
-        // Track link clicks with Fathom
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track all links with data-fathom-event attribute
-            const trackableLinks = document.querySelectorAll('a[data-fathom-event]');
-            trackableLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const eventName = this.getAttribute('data-fathom-event');
-                    if (window.fathom) {
-                        window.fathom.trackEvent(eventName);
-                    }
-                });
-            });
-
-            // Track email form submission and handle Formspree response
-            const emailForm = document.getElementById('email-form');
-            const formMessage = document.getElementById('form-message');
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
             
-            if (emailForm) {
-                emailForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    const formData = new FormData(emailForm);
-                    const submitButton = emailForm.querySelector('.email-submit');
-                    const originalText = submitButton.textContent;
-                    
-                    // Disable button during submission
-                    submitButton.disabled = true;
-                    submitButton.textContent = 'Entering...';
-                    
-                    try {
-                        const response = await fetch(emailForm.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-                        
-                        if (response.ok) {
-                            // Success
-                            emailForm.classList.add('success');
-                            emailForm.classList.remove('error');
-                            formMessage.textContent = 'Welcome to the Arena.';
-                            formMessage.className = 'email-form-message success';
-                            formMessage.style.display = 'block';
-                            emailForm.reset();
-                            
-                            // Track success
-                            if (window.fathom) {
-                                window.fathom.trackEvent('Email - Form Submission Success');
-                            }
-                        } else {
-                            // Error
-                            throw new Error('Submission failed');
-                        }
-                    } catch (error) {
-                        // Error handling
-                        emailForm.classList.add('error');
-                        emailForm.classList.remove('success');
-                        formMessage.textContent = 'Something went wrong. Please try again.';
-                        formMessage.className = 'email-form-message error';
-                        formMessage.style.display = 'block';
-                        
-                        // Track error
-                        if (window.fathom) {
-                            window.fathom.trackEvent('Email - Form Submission Error');
-                        }
-                    } finally {
-                        // Re-enable button
-                        submitButton.disabled = false;
-                        submitButton.textContent = originalText;
-                    }
-                });
-            }
-        });
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal(); // Check on load
     </script>
 </body>
 </html>
