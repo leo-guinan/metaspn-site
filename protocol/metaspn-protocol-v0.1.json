@@ -1,0 +1,173 @@
+{
+  "protocol": "MetaSPN",
+  "version": "0.1.0",
+  "title": "MetaSPN Protocol: Proof of Search + Proof of Energy Saved",
+  "status": "draft",
+  "canonical_url": "https://www.metaspn.network/protocol/",
+  "quai": {
+    "relationship": "designed to anchor receipt roots to Quai Network later",
+    "public_anchor_status": "pending",
+    "onchain_policy": "hashes, Merkle roots, aggregate receipt counts, and non-private settlement metadata only; never raw diary, query, AI chat, or private helper text"
+  },
+  "primitive": "Minimize externalized intelligence per useful answer.",
+  "core_metrics": {
+    "externalized_tokens": "Tokens sent to external AI providers for a query.",
+    "tokens_not_externalized": "Estimated baseline external tokens minus actual external tokens.",
+    "externalization_avoidance_rate": "tokens_not_externalized / baseline_external_tokens when baseline_external_tokens > 0.",
+    "search_hops": "Number of human/network routing hops required to resolve a request.",
+    "reuse_count": "How many later queries reused a prior receipt, corpus item, cache entry, or helper resolution."
+  },
+  "receipt_types": {
+    "connection_receipt": {
+      "purpose": "Payment for creating the trusted edge by which a user entered MetaSPN.",
+      "required_fields": ["id", "type", "created_at", "connected_user_id", "connected_by_user_id", "subscription_id", "promise", "result", "settlement"],
+      "settlement_basis": "settled subscription revenue",
+      "privacy": "May be private or shared; public views must not expose a user's full referral graph without consent."
+    },
+    "search_receipt": {
+      "purpose": "Records how a request moved through the human/network graph before resolution.",
+      "required_fields": ["id", "type", "created_at", "query_id", "from_node_id", "to_node_id", "hop_index", "reason", "promise", "result"],
+      "settlement_basis": "routing credit only if the route contributes to an accepted resolution or future energy saved receipt",
+      "privacy": "Reason text may be private; public anchors use hashes."
+    },
+    "resolution_receipt": {
+      "purpose": "Records the artifact, human answer, cache hit, or corpus item that resolved a query.",
+      "required_fields": ["id", "type", "created_at", "query_id", "resolved_by", "resolution_source", "accepted_by_user", "promise", "result", "evidence_hash"],
+      "settlement_basis": "eligible to receive future energy rebates when reused to avoid external AI calls",
+      "privacy": "Raw answer/context remains offchain unless explicitly public."
+    },
+    "energy_saved_receipt": {
+      "purpose": "Proof that a query was resolved without, or with less, external AI token spend than the baseline path.",
+      "required_fields": ["id", "type", "created_at", "query_id", "baseline", "actual", "saved", "credited_to", "evidence"],
+      "settlement_basis": "tokens_not_externalized and cost_saved_usd; rebates payable later to credited receipts/nodes",
+      "privacy": "Contains token/cost/accounting metadata and hashes, not raw query text by default."
+    },
+    "energy_rebate_receipt": {
+      "purpose": "Payable-later credit for the people or artifacts whose context kept a query inside the system.",
+      "required_fields": ["id", "type", "created_at", "source_energy_saved_receipt_id", "credited_to", "amount", "basis", "status"],
+      "settlement_basis": "derived from one or more energy_saved_receipts",
+      "privacy": "Public aggregate possible; user-level settlement private by default."
+    },
+    "anchor_receipt": {
+      "purpose": "Daily or periodic Merkle root over offchain receipts, designed for later Quai anchoring.",
+      "required_fields": ["id", "type", "created_at", "period", "receipt_count", "receipt_type_counts", "merkle_root", "anchor_status", "quai_tx"],
+      "settlement_basis": "none; audit/provenance only",
+      "privacy": "Only aggregate counts and roots are public by default."
+    }
+  },
+  "energy_saved_receipt_schema": {
+    "type": "object",
+    "required": ["id", "type", "created_at", "query_id", "baseline", "actual", "saved", "credited_to", "evidence"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^esr_" },
+      "type": { "const": "energy_saved_receipt" },
+      "created_at": { "type": "string", "format": "date-time" },
+      "query_id": { "type": "string" },
+      "query_class": { "enum": ["diary_search", "future_context", "semantic_lookup", "human_relay", "cached_resolution", "rule_based", "local_model"] },
+      "baseline": {
+        "type": "object",
+        "required": ["path", "estimated_input_tokens", "estimated_output_tokens", "estimated_cost_usd"],
+        "properties": {
+          "path": { "type": "string", "description": "External AI path that would normally answer this query." },
+          "provider": { "type": ["string", "null"] },
+          "model": { "type": ["string", "null"] },
+          "estimated_input_tokens": { "type": "integer", "minimum": 0 },
+          "estimated_output_tokens": { "type": "integer", "minimum": 0 },
+          "estimated_cost_usd": { "type": "number", "minimum": 0 }
+        }
+      },
+      "actual": {
+        "type": "object",
+        "required": ["path", "external_input_tokens", "external_output_tokens", "actual_cost_usd"],
+        "properties": {
+          "path": { "enum": ["local_context", "semantic_cache", "exact_cache", "human_relay", "prior_resolution", "user_corpus", "public_corpus", "local_model", "external_ai"] },
+          "external_provider": { "type": ["string", "null"] },
+          "external_input_tokens": { "type": "integer", "minimum": 0 },
+          "external_output_tokens": { "type": "integer", "minimum": 0 },
+          "actual_cost_usd": { "type": "number", "minimum": 0 }
+        }
+      },
+      "saved": {
+        "type": "object",
+        "required": ["tokens_not_externalized", "cost_saved_usd", "energy_saved_units"],
+        "properties": {
+          "tokens_not_externalized": { "type": "integer", "minimum": 0 },
+          "cost_saved_usd": { "type": "number", "minimum": 0 },
+          "energy_saved_units": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "credited_to": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["target_id", "target_type", "basis", "share"],
+          "properties": {
+            "target_id": { "type": "string" },
+            "target_type": { "enum": ["user", "connection_receipt", "search_receipt", "resolution_receipt", "corpus_item", "cache_entry"] },
+            "basis": { "type": "string" },
+            "share": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      },
+      "evidence": {
+        "type": "object",
+        "required": ["external_call_made", "answer_source", "evidence_hash"],
+        "properties": {
+          "external_call_made": { "type": "boolean" },
+          "answer_source": { "type": "string" },
+          "evidence_hash": { "type": "string" },
+          "raw_text_stored_offchain": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "validation_rules": [
+    "saved.tokens_not_externalized must equal max(0, baseline.estimated_input_tokens + baseline.estimated_output_tokens - actual.external_input_tokens - actual.external_output_tokens).",
+    "saved.energy_saved_units defaults to saved.tokens_not_externalized unless a later energy conversion table is published.",
+    "The sum of credited_to.share should be <= 1.0.",
+    "If actual.path is external_ai, tokens_not_externalized may still be positive only when the actual external call used fewer tokens than the baseline.",
+    "No raw private query, diary, AI chat, or helper text may be placed in a public anchor receipt.",
+    "Energy rebates are payable later and must reference one or more energy_saved_receipts."
+  ],
+  "example_energy_saved_receipt": {
+    "id": "esr_20260713_000001",
+    "type": "energy_saved_receipt",
+    "created_at": "2026-07-13T20:30:00Z",
+    "query_id": "q_future_context_000001",
+    "query_class": "prior_resolution",
+    "baseline": {
+      "path": "external_ai_full_context",
+      "provider": "external_ai",
+      "model": "frontier_model",
+      "estimated_input_tokens": 12000,
+      "estimated_output_tokens": 900,
+      "estimated_cost_usd": 0.045
+    },
+    "actual": {
+      "path": "prior_resolution",
+      "external_provider": null,
+      "external_input_tokens": 0,
+      "external_output_tokens": 0,
+      "actual_cost_usd": 0
+    },
+    "saved": {
+      "tokens_not_externalized": 12900,
+      "cost_saved_usd": 0.045,
+      "energy_saved_units": 12900
+    },
+    "credited_to": [
+      {
+        "target_id": "res_closure_context_001",
+        "target_type": "resolution_receipt",
+        "basis": "Reusable human context resolved this query without external AI.",
+        "share": 1
+      }
+    ],
+    "evidence": {
+      "external_call_made": false,
+      "answer_source": "res_closure_context_001",
+      "evidence_hash": "sha256:example",
+      "raw_text_stored_offchain": true
+    }
+  }
+}

@@ -19,7 +19,7 @@
     <header>
       <div class="brand"><span class="sigil" aria-hidden="true"></span>MetaSPN</div>
       <nav aria-label="Primary">
-        <a href="#protocol">Protocol</a>
+        <a href="/protocol/">Protocol</a>
         <a href="#receipts">Receipts</a>
         <a href="#energy">Energy</a>
         <a href="#quai">Quai</a>
@@ -31,9 +31,9 @@
         <div>
           <span class="eyebrow">The metanetwork protocol network</span>
           <h1>The <em>network network</em>.</h1>
-          <p class="lede"><strong>MetaSPN routes missing context through people.</strong> AI gives you memory. MetaSPN gives you humans: connection receipts for trusted edges, proof of search for finding the path, and proof of energy for the work that resolves it.</p>
+          <p class="lede"><strong>MetaSPN routes missing context through people.</strong> AI gives you memory. MetaSPN gives you humans: connection receipts for trusted edges, proof of search for finding the path, and proof of energy saved for external tokens that never had to leave the system.</p>
           <div class="cta-row">
-            <a class="btn primary" href="#protocol">Read the protocol</a>
+            <a class="btn primary" href="/protocol/">Read the protocol</a>
             <a class="btn" href="https://www.qu.ai/" rel="noopener" target="_blank">Operating on Quai</a>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="grid">
           <article class="card"><span class="tag">Connection</span><h3>Referral receipts</h3><p>Payment for creating the trusted edge. A connected user joins through a person, not a faceless funnel.</p></article>
           <article class="card"><span class="tag">Search</span><h3>Proof of search</h3><p>When the first person cannot help, the request moves through the graph. Each route creates a receipt.</p></article>
-          <article class="card"><span class="tag">Work</span><h3>Proof of energy</h3><p>Helpers earn later rebates for accepted context, routing, interpretation, and resolution.</p></article>
+          <article class="card"><span class="tag">Energy Saved</span><h3>Proof of energy saved</h3><p>Queries that resolve from memory, corpus, cache, or human relay avoid external AI token spend. Those avoided exits create rebate receipts.</p></article>
         </div>
         <div class="warning"><strong>Line held:</strong> recruitment alone is not the product. The useful network is measured by how many hops it takes for missing context to reach the person who can resolve it.</div>
       </section>
@@ -81,13 +81,13 @@
   "result": "User subscribed through this edge.",
   "share": "50% of settled subscription revenue"
 }</pre></article>
-          <article class="receipt"><h3>Energy rebate</h3><p>Payable later to helpers.</p><pre>{
+          <article class="receipt"><h3>Energy rebate</h3><p>Payable later from proof of external tokens avoided.</p><pre>{
   "type": "energy_rebate",
-  "request": "future_context_request",
-  "helper": "human_node",
-  "role": "router | resolver | interpreter",
-  "promise": "Move missing context toward resolution.",
-  "result": "Accepted context returned to the user.",
+  "source": "energy_saved_receipt",
+  "credited_to": "resolution_or_helper",
+  "basis": "tokens_not_externalized",
+  "promise": "Keep useful intelligence inside MetaSPN.",
+  "result": "Query resolved without a fresh outside AI call.",
   "status": "payable_later"
 }</pre></article>
         </div>
@@ -98,25 +98,25 @@
           <div>
             <span class="tag">04 · economics</span>
             <h2>Usage is help-based.</h2>
-            <p class="section-intro">The expensive event is not a passive subscriber. The expensive event is useful human context. MetaSPN records how much a request moved through the chain to make the connection.</p>
+            <p class="section-intro">The expensive event is externalization. MetaSPN records which useful queries were resolved by memory, corpus, cache, prior resolutions, or human relay before they became fresh outside AI calls.</p>
           </div>
           <div class="card"><p class="quote">The communication is not on the AI layer. It is in the user network layer.</p><p style="margin-top:18px;color:var(--muted)">AI compresses. Humans route. Receipts settle. The graph becomes valuable when it can find the person who knows, not when it can pretend the model already does.</p></div>
         </div>
         <div class="metric-row">
           <div class="metric"><b>50%</b><span>connection share target</span></div>
           <div class="metric"><b>n hops</b><span>search distance</span></div>
-          <div class="metric"><b>later</b><span>energy rebates settle after proof</span></div>
-          <div class="metric"><b>0</b><span>value from fake certainty</span></div>
+          <div class="metric"><b>tokens</b><span>not externalized</span></div>
+          <div class="metric"><b>0</b><span>reward for fake certainty</span></div>
         </div>
       </section>
 
       <section class="section" id="quai">
         <span class="tag">05 · substrate</span>
         <h2>Operating on Quai Network.</h2>
-        <p class="section-intro">MetaSPN is designed as a metanetwork protocol on top of a work-based network: proof of search with proof of energy. Quai provides the energy-native substrate; MetaSPN records the human search and help layer above it.</p>
+        <p class="section-intro">MetaSPN is designed as a metanetwork protocol on top of a work-based network: proof of search with proof of energy saved. Quai provides the energy-native substrate; MetaSPN records the human search and token-conservation layer above it.</p>
         <div class="grid">
           <article class="card"><h3>Proof of search</h3><p>Every escalation preserves the path: who searched, who routed, and which edge reduced uncertainty.</p></article>
-          <article class="card"><h3>Proof of energy</h3><p>Accepted help creates payable energy rebate receipts. The useful work is not vibes. It leaves accounting.</p></article>
+          <article class="card"><h3>Proof of energy saved</h3><p>Internal answers create energy-saved receipts when they prevent or reduce external AI token spend.</p></article>
           <article class="card"><h3>Metanetwork protocol</h3><p>Networks need networks: humans behind humans, ledgers behind promises, and receipts behind trust.</p></article>
         </div>
         <div class="cta-row"><a class="btn primary" href="https://www.qu.ai/" target="_blank" rel="noopener">Visit Quai Network</a><a class="btn" href="mailto:leo@ideanexusventures.com?subject=MetaSPN%20protocol">Talk to MetaSPN</a></div>
@@ -124,8 +124,8 @@
     </main>
 
     <footer>
-      <span>MetaSPN · the network network · proof of search with proof of energy</span>
-      <span>connection receipts now · energy rebates later</span>
+      <span>MetaSPN · the network network · proof of search with proof of energy saved</span>
+      <span>connection receipts now · token-conservation rebates later</span>
     </footer>
   </div>
 </body>

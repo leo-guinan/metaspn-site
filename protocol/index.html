@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MetaSPN Protocol v0.1 · Proof of Energy Saved</title>
+  <meta name="description" content="MetaSPN Protocol v0.1: proof of search plus proof of energy saved. Receipts for connection, search, resolution, external tokens avoided, and future rebates.">
+  <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+  <style>
+    :root{--bg:#050506;--panel:#101114;--ink:#f5efe3;--muted:#b8ad9d;--line:#2b261d;--gold:#f1bd4b;--green:#76d38a;--blue:#80a7ff;--amber:#ff7b3d;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,rgba(241,189,75,.14),transparent 34%),#050506;color:var(--ink);font-family:var(--sans);line-height:1.6}body:before{content:"";position:fixed;inset:0;background:linear-gradient(90deg,rgba(241,189,75,.045) 1px,transparent 1px),linear-gradient(rgba(241,189,75,.035) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;mask-image:linear-gradient(to bottom,black,transparent 75%)}.wrap{width:min(1120px,calc(100% - 36px));margin:auto;position:relative}header{padding:24px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:center}.brand,a{color:var(--gold)}.brand{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-size:13px}nav{display:flex;gap:16px;flex-wrap:wrap}nav a{font-family:var(--mono);font-size:12px;text-decoration:none;color:var(--muted)}nav a:hover{color:var(--gold)}main{padding:76px 0}h1{font-size:clamp(44px,7vw,82px);line-height:.95;margin:0 0 20px;letter-spacing:-.055em}h2{font-size:clamp(30px,4vw,48px);line-height:1.05;margin:0 0 14px;letter-spacing:-.035em}h3{margin:0 0 10px}.lede{font-size:20px;color:var(--muted);max-width:820px}.tag{display:inline-block;color:var(--gold);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}.section{padding:60px 0;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}.card{border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(16,17,20,.86),rgba(5,5,6,.72));padding:22px}.card p,.muted{color:var(--muted)}.equation{font-family:var(--mono);border:1px solid rgba(241,189,75,.35);border-radius:18px;background:#080806;padding:22px;margin:24px 0;color:#ead8b7;overflow:auto}.flow{display:grid;gap:12px;margin-top:24px}.step{display:grid;grid-template-columns:130px 1fr;gap:18px;border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(16,17,20,.72)}.step b{font-family:var(--mono);color:var(--gold);font-size:12px;letter-spacing:.14em}pre{white-space:pre-wrap;word-break:break-word;margin:0;font-family:var(--mono);font-size:12px;color:#dbc9a8}.callout{border-left:3px solid var(--green);background:rgba(118,211,138,.08);border-radius:0 14px 14px 0;padding:18px 20px;color:#cdeed3}.warn{border-left-color:var(--amber);background:rgba(255,123,61,.08);color:#f1c0a5}.receipt-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}.pill{display:inline-flex;border:1px solid rgba(241,189,75,.35);border-radius:999px;padding:7px 10px;font-family:var(--mono);font-size:11px;color:var(--gold);margin:4px 4px 0 0}.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(241,189,75,.5);border-radius:999px;padding:12px 16px;color:var(--ink);text-decoration:none;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em}.btn.primary{background:var(--gold);color:#160f05;font-weight:800}footer{border-top:1px solid var(--line);padding:30px 0 44px;color:#766f64;font-family:var(--mono);font-size:12px}@media(max-width:820px){.grid,.receipt-list{grid-template-columns:1fr}.step{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">MetaSPN</a>
+      <nav>
+        <a href="#primitive">Primitive</a>
+        <a href="#receipts">Receipts</a>
+        <a href="#energy">Energy Saved</a>
+        <a href="#anchor">Quai Anchor</a>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <span class="tag">Protocol v0.1 · draft</span>
+        <h1>Proof of search. Proof of energy saved.</h1>
+        <p class="lede">MetaSPN is a protocol for reducing externalized intelligence. The network becomes more valuable when user questions are resolved by memory, corpus, cache, prior human resolutions, or trusted relays instead of leaving the system as fresh external AI token spend.</p>
+        <div class="cta"><a class="btn primary" href="/protocol/metaspn-protocol-v0.1.json">Download JSON spec</a><a class="btn" href="https://www.qu.ai/" target="_blank" rel="noopener">Quai Network</a></div>
+      </section>
+
+      <section class="section" id="primitive">
+        <span class="tag">01 · primitive</span>
+        <h2>Minimize externalized tokens per useful answer.</h2>
+        <p class="muted">A normal AI app celebrates more model calls. MetaSPN measures the opposite: what useful queries did not need to leave the network?</p>
+        <div class="equation">tokens_not_externalized = baseline_external_tokens - actual_external_tokens
+
+energy_saved_units = tokens_not_externalized
+
+rebates accrue to the receipts, people, and artifacts that made the avoided call possible.</div>
+        <div class="callout"><strong>Proof of energy saved:</strong> a receipt that records an avoided or reduced external AI call. It is not a claim of mystical effort. It is accounting for tokens that stayed inside the network.</div>
+      </section>
+
+      <section class="section" id="receipts">
+        <span class="tag">02 · receipt grammar</span>
+        <h2>Six receipts compose the protocol.</h2>
+        <div class="receipt-list">
+          <article class="card"><h3>Connection receipt</h3><p>Payment for the trusted edge: who brought whom into MetaSPN.</p></article>
+          <article class="card"><h3>Search receipt</h3><p>Records the route a request took through people, caches, corpora, and prior resolutions.</p></article>
+          <article class="card"><h3>Resolution receipt</h3><p>Records what actually answered the query: human, corpus item, cache hit, prior answer, local model, or external AI.</p></article>
+          <article class="card"><h3>Energy saved receipt</h3><p>Measures baseline tokens versus actual external tokens and stores the saved amount.</p></article>
+          <article class="card"><h3>Energy rebate receipt</h3><p>Payable-later credit to whoever or whatever helped avoid external token spend.</p></article>
+          <article class="card"><h3>Anchor receipt</h3><p>Merkle root over private receipts, designed for later Quai anchoring without leaking raw text.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="energy">
+        <span class="tag">03 · queries that do not leave</span>
+        <h2>The network pays for avoided exits.</h2>
+        <p class="muted">A query earns energy-saved accounting when it is resolved by an internal path instead of a fresh external model call.</p>
+        <div class="grid">
+          <article class="card"><h3>Memory/corpus hit</h3><p>User-owned diary, imported corpus, or public artifact answers without generation.</p></article>
+          <article class="card"><h3>Semantic cache hit</h3><p>A prior resolution answers a similar query. The first answer becomes reusable infrastructure.</p></article>
+          <article class="card"><h3>Human relay</h3><p>The referrer or an up-chain helper supplies context that prevents the model from guessing.</p></article>
+          <article class="card"><h3>Prior resolution</h3><p>An accepted answer becomes a cited object and resolves later questions.</p></article>
+          <article class="card"><h3>Local/small model</h3><p>A cheaper internal path replaces a larger external call.</p></article>
+          <article class="card"><h3>Refusal with context</h3><p>The system knows not to call outside because the right answer is “route this to a human.”</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <span class="tag">04 · event flow</span>
+        <h2>From question to rebate.</h2>
+        <div class="flow">
+          <div class="step"><b>QUERY</b><div><h3>User asks for future context.</h3><p>The system estimates the baseline external AI path before choosing a route.</p></div></div>
+          <div class="step"><b>SEARCH</b><div><h3>MetaSPN searches inward first.</h3><p>Memory, corpus, cache, resolution receipts, and trusted humans are checked before an outside model.</p></div></div>
+          <div class="step"><b>RESOLVE</b><div><h3>A useful answer is accepted.</h3><p>The answer source becomes a resolution receipt. Raw private text stays offchain.</p></div></div>
+          <div class="step"><b>SAVE</b><div><h3>External tokens avoided are counted.</h3><p>The energy saved receipt records estimated baseline tokens, actual external tokens, and tokens_not_externalized.</p></div></div>
+          <div class="step"><b>REBATE</b><div><h3>Credit flows to the context source.</h3><p>Energy rebate receipts accrue to the helper, receipt, corpus item, or cache entry that kept the query inside.</p></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="anchor">
+        <span class="tag">05 · Quai anchoring</span>
+        <h2>Anchor roots, not private thoughts.</h2>
+        <p class="muted">MetaSPN should not put diary entries, AI chats, helper messages, or raw queries onchain. The protocol stores receipts offchain, hashes them, and periodically anchors aggregate roots to Quai.</p>
+        <div class="equation"><pre>{
+  "type": "anchor_receipt",
+  "period": "2026-07-13",
+  "receipt_count": 482,
+  "receipt_type_counts": {
+    "connection_receipt": 7,
+    "search_receipt": 58,
+    "resolution_receipt": 26,
+    "energy_saved_receipt": 391
+  },
+  "merkle_root": "0x...",
+  "anchor_status": "pending",
+  "quai_tx": null
+}</pre></div>
+        <div class="callout warn"><strong>Regulatory line:</strong> this is not an investment return promise. It is a receipt protocol for connection payments and later rebates tied to measurable external token avoidance.</div>
+      </section>
+    </main>
+    <footer>MetaSPN Protocol v0.1 · proof of search + proof of energy saved · JSON spec at /protocol/metaspn-protocol-v0.1.json</footer>
+  </div>
+</body>
+</html>
