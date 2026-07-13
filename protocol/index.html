@@ -18,6 +18,7 @@
         <a href="#primitive">Primitive</a>
         <a href="#receipts">Receipts</a>
         <a href="#energy">Energy Saved</a>
+        <a href="#wallet">Wallet Login</a>
         <a href="#anchor">Quai Anchor</a>
       </nav>
     </header>
@@ -26,7 +27,7 @@
         <span class="tag">Protocol v0.1 · draft</span>
         <h1>Proof of search. Proof of energy saved.</h1>
         <p class="lede">MetaSPN is a protocol for reducing externalized intelligence. The network becomes more valuable when user questions are resolved by memory, corpus, cache, prior human resolutions, or trusted relays instead of leaving the system as fresh external AI token spend.</p>
-        <div class="cta"><a class="btn primary" href="/protocol/metaspn-protocol-v0.1.json">Download JSON spec</a><a class="btn" href="https://www.qu.ai/" target="_blank" rel="noopener">Quai Network</a></div>
+        <div class="cta"><a class="btn primary" href="/wallet/">Login with Quai wallet</a><a class="btn" href="/protocol/metaspn-protocol-v0.1.json">Download JSON spec</a><a class="btn" href="https://www.qu.ai/" target="_blank" rel="noopener">Quai Network</a></div>
       </section>
 
       <section class="section" id="primitive">
@@ -43,8 +44,9 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
 
       <section class="section" id="receipts">
         <span class="tag">02 · receipt grammar</span>
-        <h2>Six receipts compose the protocol.</h2>
+        <h2>Seven receipts compose the protocol.</h2>
         <div class="receipt-list">
+          <article class="card"><h3>Wallet login receipt</h3><p>Proof that a user controlled a Quai address before connection, search, or rebate settlement.</p></article>
           <article class="card"><h3>Connection receipt</h3><p>Payment for the trusted edge: who brought whom into MetaSPN.</p></article>
           <article class="card"><h3>Search receipt</h3><p>Records the route a request took through people, caches, corpora, and prior resolutions.</p></article>
           <article class="card"><h3>Resolution receipt</h3><p>Records what actually answered the query: human, corpus item, cache hit, prior answer, local model, or external AI.</p></article>
@@ -54,8 +56,24 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
         </div>
       </section>
 
+      <section class="section" id="wallet">
+        <span class="tag">03 · wallet identity</span>
+        <h2>Audience identity starts with a Quai signature.</h2>
+        <p class="muted">MetaSPN wallet login asks an injected Quai/Pelagus provider for an address and signs a domain-bound nonce message. The result is a wallet_login_receipt: identity proof now, server session and rebate settlement later.</p>
+        <div class="equation"><pre>{
+  "type": "wallet_login_receipt",
+  "address": "0x...",
+  "domain": "www.metaspn.network",
+  "provider": "window.quai | window.pelagus",
+  "message": "MetaSPN Wallet Login...",
+  "signature": "0x...",
+  "settlement_status": "local_only_pending_server_session"
+}</pre></div>
+        <div class="cta"><a class="btn primary" href="/wallet/">Open wallet login</a></div>
+      </section>
+
       <section class="section" id="energy">
-        <span class="tag">03 · queries that do not leave</span>
+        <span class="tag">04 · queries that do not leave</span>
         <h2>The network pays for avoided exits.</h2>
         <p class="muted">A query earns energy-saved accounting when it is resolved by an internal path instead of a fresh external model call.</p>
         <div class="grid">
@@ -69,7 +87,7 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
       </section>
 
       <section class="section">
-        <span class="tag">04 · event flow</span>
+        <span class="tag">05 · event flow</span>
         <h2>From question to rebate.</h2>
         <div class="flow">
           <div class="step"><b>QUERY</b><div><h3>User asks for future context.</h3><p>The system estimates the baseline external AI path before choosing a route.</p></div></div>
@@ -81,7 +99,7 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
       </section>
 
       <section class="section" id="anchor">
-        <span class="tag">05 · Quai anchoring</span>
+        <span class="tag">06 · Quai anchoring</span>
         <h2>Anchor roots, not private thoughts.</h2>
         <p class="muted">MetaSPN should not put diary entries, AI chats, helper messages, or raw queries onchain. The protocol stores receipts offchain, hashes them, and periodically anchors aggregate roots to Quai.</p>
         <div class="equation"><pre>{

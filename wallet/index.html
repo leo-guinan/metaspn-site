@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MetaSPN Wallet Login · Quai</title>
+  <meta name="description" content="Connect a Quai wallet to MetaSPN and sign a local wallet-login receipt for connection receipts and proof-of-energy-saved rebates.">
+  <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+  <style>
+    :root{--bg:#050506;--panel:#101114;--ink:#f5efe3;--muted:#b8ad9d;--line:#2b261d;--gold:#f1bd4b;--green:#76d38a;--amber:#ff7b3d;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 82% 8%,rgba(241,189,75,.14),transparent 34%),#050506;color:var(--ink);font-family:var(--sans);line-height:1.6}.wrap{width:min(940px,calc(100% - 36px));margin:auto}header{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}a{color:var(--gold)}.brand{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-size:13px}main{padding:76px 0}h1{font-size:clamp(42px,7vw,76px);line-height:.95;margin:0 0 20px;letter-spacing:-.055em}.lede{font-size:20px;color:var(--muted);max-width:760px}.tag{display:inline-block;color:var(--gold);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}.panel{margin-top:30px;border:1px solid rgba(241,189,75,.38);border-radius:22px;background:linear-gradient(160deg,rgba(20,21,24,.92),rgba(8,8,8,.74));padding:24px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(241,189,75,.5);border-radius:999px;padding:12px 16px;background:transparent;color:var(--ink);text-decoration:none;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}.btn.primary{background:var(--gold);color:#160f05;font-weight:800}.btn[disabled]{opacity:.55;cursor:not-allowed}.status{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:14px;background:#070707}.receipt{white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto;margin-top:14px;color:#d9c7a6;font-family:var(--mono);font-size:12px}.note{border-left:3px solid var(--green);background:rgba(118,211,138,.08);border-radius:0 14px 14px 0;padding:18px 20px;color:#cdeed3;margin-top:24px}.warn{border-left-color:var(--amber);background:rgba(255,123,61,.08);color:#f1c0a5}footer{border-top:1px solid var(--line);padding:28px 0 42px;color:#766f64;font-family:var(--mono);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="brand" href="/">MetaSPN</a><a href="/protocol/">Protocol</a></header>
+    <main>
+      <span class="tag">Quai wallet identity · v0</span>
+      <h1>Login with a Quai wallet.</h1>
+      <p class="lede">MetaSPN starts audience identity with wallet control. Sign a local receipt to prove the address that can later receive connection receipts and proof-of-energy-saved rebates.</p>
+      <div class="panel">
+        <h2>Wallet login receipt</h2>
+        <p style="color:var(--muted);margin-top:0">Uses the injected Quai/Pelagus provider when available. This does not send a transaction and does not request funds.</p>
+        <div class="actions">
+          <button class="btn primary" id="connect-wallet" type="button">Connect Quai wallet</button>
+          <button class="btn" id="sign-wallet" type="button" disabled>Sign login receipt</button>
+          <button class="btn" id="clear-wallet" type="button">Clear local receipt</button>
+          <a class="btn" href="https://pelaguswallet.io/" target="_blank" rel="noopener">Get Pelagus</a>
+        </div>
+        <div class="status" id="wallet-status">No Quai wallet connected. Install Pelagus or another Quai-compatible injected wallet.</div>
+        <pre class="receipt" id="wallet-receipt" hidden></pre>
+      </div>
+      <div class="note"><strong>What this proves:</strong> the signer controlled a Quai address at a time, domain, nonce, and message. It is the identity primitive for connection receipts.</div>
+      <div class="note warn"><strong>What this does not do yet:</strong> create a server session, settle rebates, or write to Quai. Those require the next backend/anchor layer. Useful disappointment, clearly labeled.</div>
+    </main>
+    <footer>MetaSPN wallet login · local receipt now · server session next</footer>
+  </div>
+  <script>
+    (function(){
+      const status = document.getElementById('wallet-status');
+      const receiptEl = document.getElementById('wallet-receipt');
+      const connectBtn = document.getElementById('connect-wallet');
+      const signBtn = document.getElementById('sign-wallet');
+      const clearBtn = document.getElementById('clear-wallet');
+      const storageKey = 'metaspn.quaiLoginReceipt.v1';
+      let currentAccount = null;
+      function provider(){ return window.quai || window.pelagus || null; }
+      function short(addr){ return addr ? addr.slice(0,8) + '…' + addr.slice(-6) : ''; }
+      function setStatus(text){ if(status) status.textContent = text; }
+      function showReceipt(receipt){ if(!receiptEl) return; if(receipt){ receiptEl.hidden = false; receiptEl.textContent = JSON.stringify(receipt, null, 2); } else { receiptEl.hidden = true; receiptEl.textContent = ''; } }
+      function saveReceipt(receipt){ localStorage.setItem(storageKey, JSON.stringify(receipt)); showReceipt(receipt); }
+      function loadReceipt(){ try { return JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch (_) { return null; } }
+      async function connect(){
+        const p = provider();
+        if(!p || !p.request){ setStatus('No Quai injected wallet found. Install Pelagus, then reload.'); return; }
+        try {
+          const accounts = await p.request({ method: 'quai_requestAccounts' });
+          currentAccount = Array.isArray(accounts) ? accounts[0] : accounts;
+          if(!currentAccount) throw new Error('No account returned by wallet.');
+          signBtn.disabled = false;
+          setStatus('Connected: ' + short(currentAccount) + '. Sign a MetaSPN login receipt to continue.');
+          if(window.fathom) window.fathom.trackEvent('MetaSPN Quai Wallet Connected');
+        } catch (err) { setStatus('Wallet connection failed: ' + (err && err.message ? err.message : String(err))); }
+      }
+      async function sign(){
+        const p = provider();
+        if(!p || !p.request){ setStatus('No Quai injected wallet found.'); return; }
+        if(!currentAccount){ await connect(); if(!currentAccount) return; }
+        const nonce = crypto.getRandomValues(new Uint32Array(4));
+        const nonceHex = Array.from(nonce).map(n => n.toString(16).padStart(8,'0')).join('');
+        const issuedAt = new Date().toISOString();
+        const message = ['MetaSPN Wallet Login','Purpose: prove control of a Quai address for connection receipts and proof-of-energy-saved rebates.','Domain: ' + location.host,'Address: ' + currentAccount,'Issued At: ' + issuedAt,'Nonce: ' + nonceHex,'No transaction. No funds requested.'].join('\n');
+        try {
+          const signature = await p.request({ method: 'personal_sign', params: [message, currentAccount] });
+          const receipt = { type:'wallet_login_receipt', version:'0.1.0', address:currentAccount, domain:location.host, issued_at:issuedAt, nonce:nonceHex, provider:window.quai ? 'window.quai' : 'window.pelagus', message, signature, settlement_status:'local_only_pending_server_session' };
+          saveReceipt(receipt);
+          setStatus('Signed login receipt for ' + short(currentAccount) + '. Stored locally in this browser.');
+          if(window.fathom) window.fathom.trackEvent('MetaSPN Quai Wallet Login Signed');
+        } catch (err) { setStatus('Signature rejected or failed: ' + (err && err.message ? err.message : String(err))); }
+      }
+      function clear(){ localStorage.removeItem(storageKey); currentAccount = null; signBtn.disabled = true; showReceipt(null); setStatus('Local wallet login receipt cleared.'); }
+      connectBtn && connectBtn.addEventListener('click', connect);
+      signBtn && signBtn.addEventListener('click', sign);
+      clearBtn && clearBtn.addEventListener('click', clear);
+      const existing = loadReceipt();
+      if(existing){ currentAccount = existing.address; signBtn.disabled = false; showReceipt(existing); setStatus('Existing local wallet login receipt: ' + short(existing.address)); }
+      const p = provider();
+      if(p && p.on){ p.on('accountsChanged', (accounts) => { currentAccount = accounts && accounts[0] ? accounts[0] : null; signBtn.disabled = !currentAccount; setStatus(currentAccount ? 'Connected: ' + short(currentAccount) : 'Wallet disconnected.'); }); }
+    })();
+  </script>
+</body>
+</html>
