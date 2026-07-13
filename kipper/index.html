@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MetaSPN Kipper Login · X + Quai</title>
+  <meta name="description" content="Use Kipper's X-integrated social-money identity as the MetaSPN login receipt for connection receipts and proof-of-energy-saved rebates.">
+  <script src="https://cdn.usefathom.com/script.js" data-site="YDMELMTV" defer></script>
+  <style>
+    :root{--bg:#050506;--panel:#101114;--ink:#f5efe3;--muted:#b8ad9d;--line:#2b261d;--gold:#f1bd4b;--green:#76d38a;--amber:#ff7b3d;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 82% 8%,rgba(241,189,75,.14),transparent 34%),#050506;color:var(--ink);font-family:var(--sans);line-height:1.6}.wrap{width:min(940px,calc(100% - 36px));margin:auto}header{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}a{color:var(--gold)}.brand{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;font-size:13px}main{padding:76px 0}h1{font-size:clamp(42px,7vw,76px);line-height:.95;margin:0 0 20px;letter-spacing:-.055em}.lede{font-size:20px;color:var(--muted);max-width:760px}.tag{display:inline-block;color:var(--gold);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}.panel{margin-top:30px;border:1px solid rgba(241,189,75,.38);border-radius:22px;background:linear-gradient(160deg,rgba(20,21,24,.92),rgba(8,8,8,.74));padding:24px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(241,189,75,.5);border-radius:999px;padding:12px 16px;background:transparent;color:var(--ink);text-decoration:none;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}.btn.primary{background:var(--gold);color:#160f05;font-weight:800}input{min-width:220px;border:1px solid var(--line);border-radius:999px;background:#070707;color:var(--ink);padding:13px 17px;font-family:var(--mono)}.status{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:14px;background:#070707}.receipt{white-space:pre-wrap;word-break:break-word;max-height:360px;overflow:auto;margin-top:14px;color:#d9c7a6;font-family:var(--mono);font-size:12px}.note{border-left:3px solid var(--green);background:rgba(118,211,138,.08);border-radius:0 14px 14px 0;padding:18px 20px;color:#cdeed3;margin-top:24px}.warn{border-left-color:var(--amber);background:rgba(255,123,61,.08);color:#f1c0a5}footer{border-top:1px solid var(--line);padding:28px 0 42px;color:#766f64;font-family:var(--mono);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><a class="brand" href="/">MetaSPN</a><a href="/protocol/">Protocol</a></header>
+    <main>
+      <span class="tag">Kipper identity · X-integrated · v0</span>
+      <h1>Login with Kipper.</h1>
+      <p class="lede">Kipper is already where Quai meets X. MetaSPN uses that social-money identity as the audience entry point for connection receipts and future proof-of-energy-saved rebates.</p>
+      <div class="panel">
+        <h2>Kipper identity receipt</h2>
+        <p style="color:var(--muted);margin-top:0">This creates a local receipt for your X/Kipper identity. It does not claim server verification yet. When MetaSPN gets Kipper/Twitter auth, this receipt becomes the binding primitive.</p>
+        <div class="actions">
+          <input id="kipper-handle" placeholder="@x_handle" aria-label="X handle">
+          <input id="kipper-address" placeholder="optional Quai address" aria-label="Optional Quai address">
+          <button class="btn primary" id="connect-kipper" type="button">Create Kipper receipt</button>
+          <button class="btn" id="clear-kipper" type="button">Clear local receipt</button>
+          <a class="btn" href="https://kipper.money/" target="_blank" rel="noopener">Open Kipper</a>
+          <a class="btn" href="https://chromewebstore.google.com/detail/kipper/oonanjjcaojppeohmgffiflilapncgcj" target="_blank" rel="noopener">Install Kipper</a>
+        </div>
+        <div class="status" id="kipper-status">No Kipper identity receipt yet. Enter your X handle.</div>
+        <pre class="receipt" id="kipper-receipt" hidden></pre>
+      </div>
+      <div class="note"><strong>What this proves:</strong> the browser created a MetaSPN receipt binding an X handle to the local session and optional Quai address.</div>
+      <div class="note warn"><strong>What this does not prove yet:</strong> Kipper/Twitter account control. That needs a backend auth integration or Kipper API. No imaginary OAuth was harmed.</div>
+    </main>
+    <footer>MetaSPN Kipper login · local receipt now · Kipper/Twitter verification next</footer>
+  </div>
+  <script>
+    (function(){
+      const status = document.getElementById('kipper-status');
+      const receiptEl = document.getElementById('kipper-receipt');
+      const handleInput = document.getElementById('kipper-handle');
+      const addressInput = document.getElementById('kipper-address');
+      const connectBtn = document.getElementById('connect-kipper');
+      const clearBtn = document.getElementById('clear-kipper');
+      const storageKey = 'metaspn.kipperIdentityReceipt.v1';
+      function normalizeHandle(value){ return (value || '').trim().replace(/^@+/, '').toLowerCase(); }
+      function setStatus(text){ if(status) status.textContent = text; }
+      function showReceipt(receipt){ if(!receiptEl) return; if(receipt){ receiptEl.hidden = false; receiptEl.textContent = JSON.stringify(receipt, null, 2); } else { receiptEl.hidden = true; receiptEl.textContent = ''; } }
+      function saveReceipt(receipt){ localStorage.setItem(storageKey, JSON.stringify(receipt)); showReceipt(receipt); }
+      function loadReceipt(){ try { return JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch (_) { return null; } }
+      function createReceipt(){
+        const handle = normalizeHandle(handleInput && handleInput.value);
+        const quaiAddress = (addressInput && addressInput.value || '').trim();
+        if(!handle){ setStatus('Enter the X handle connected to your Kipper identity.'); return; }
+        const issuedAt = new Date().toISOString();
+        const nonce = Array.from(crypto.getRandomValues(new Uint32Array(4))).map(n => n.toString(16).padStart(8,'0')).join('');
+        const receipt = { type:'kipper_identity_receipt', version:'0.1.0', x_handle:handle, kipper_url:'https://kipper.money/', x_url:'https://x.com/' + handle, quai_address:quaiAddress || null, domain:location.host, issued_at:issuedAt, nonce, verification_status:'local_only_pending_kipper_twitter_verification', settlement_status:'not_settleable_until_server_verified', note:'Kipper is the X-integrated social-money identity layer; this local receipt is a placeholder until MetaSPN verifies Kipper/Twitter server-side.' };
+        saveReceipt(receipt);
+        setStatus('Kipper identity receipt created for @' + handle + '. Stored locally; server verification comes next.');
+        if(window.fathom) window.fathom.trackEvent('MetaSPN Kipper Identity Receipt Created');
+      }
+      function clear(){ localStorage.removeItem(storageKey); showReceipt(null); setStatus('Local Kipper identity receipt cleared.'); }
+      connectBtn && connectBtn.addEventListener('click', createReceipt);
+      clearBtn && clearBtn.addEventListener('click', clear);
+      const existing = loadReceipt();
+      if(existing){ if(handleInput) handleInput.value = '@' + existing.x_handle; if(addressInput && existing.quai_address) addressInput.value = existing.quai_address; showReceipt(existing); setStatus('Existing local Kipper identity receipt: @' + existing.x_handle); }
+    })();
+  </script>
+</body>
+</html>

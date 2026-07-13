@@ -18,7 +18,7 @@
         <a href="#primitive">Primitive</a>
         <a href="#receipts">Receipts</a>
         <a href="#energy">Energy Saved</a>
-        <a href="#wallet">Wallet Login</a>
+        <a href="#kipper">Kipper Login</a>
         <a href="#anchor">Quai Anchor</a>
       </nav>
     </header>
@@ -27,7 +27,7 @@
         <span class="tag">Protocol v0.1 · draft</span>
         <h1>Proof of search. Proof of energy saved.</h1>
         <p class="lede">MetaSPN is a protocol for reducing externalized intelligence. The network becomes more valuable when user questions are resolved by memory, corpus, cache, prior human resolutions, or trusted relays instead of leaving the system as fresh external AI token spend.</p>
-        <div class="cta"><a class="btn primary" href="/wallet/">Login with Quai wallet</a><a class="btn" href="/protocol/metaspn-protocol-v0.1.json">Download JSON spec</a><a class="btn" href="https://www.qu.ai/" target="_blank" rel="noopener">Quai Network</a></div>
+        <div class="cta"><a class="btn primary" href="/kipper/">Login with Kipper</a><a class="btn" href="/protocol/metaspn-protocol-v0.1.json">Download JSON spec</a><a class="btn" href="https://www.qu.ai/" target="_blank" rel="noopener">Quai Network</a></div>
       </section>
 
       <section class="section" id="primitive">
@@ -46,7 +46,7 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
         <span class="tag">02 · receipt grammar</span>
         <h2>Seven receipts compose the protocol.</h2>
         <div class="receipt-list">
-          <article class="card"><h3>Wallet login receipt</h3><p>Proof that a user controlled a Quai address before connection, search, or rebate settlement.</p></article>
+          <article class="card"><h3>Kipper identity receipt</h3><p>Proof that a user claimed an X/Kipper identity before connection, search, or rebate settlement.</p></article>
           <article class="card"><h3>Connection receipt</h3><p>Payment for the trusted edge: who brought whom into MetaSPN.</p></article>
           <article class="card"><h3>Search receipt</h3><p>Records the route a request took through people, caches, corpora, and prior resolutions.</p></article>
           <article class="card"><h3>Resolution receipt</h3><p>Records what actually answered the query: human, corpus item, cache hit, prior answer, local model, or external AI.</p></article>
@@ -56,20 +56,19 @@ rebates accrue to the receipts, people, and artifacts that made the avoided call
         </div>
       </section>
 
-      <section class="section" id="wallet">
-        <span class="tag">03 · wallet identity</span>
-        <h2>Audience identity starts with a Quai signature.</h2>
-        <p class="muted">MetaSPN wallet login asks an injected Quai/Pelagus provider for an address and signs a domain-bound nonce message. The result is a wallet_login_receipt: identity proof now, server session and rebate settlement later.</p>
+      <section class="section" id="kipper">
+        <span class="tag">03 · Kipper identity</span>
+        <h2>Audience identity starts with Kipper on X.</h2>
+        <p class="muted">MetaSPN Kipper login records an X handle, Kipper path, and optional Quai address. The result is a kipper_identity_receipt: local identity proof now, Kipper/Twitter verification and rebate settlement later.</p>
         <div class="equation"><pre>{
-  "type": "wallet_login_receipt",
-  "address": "0x...",
-  "domain": "www.metaspn.network",
-  "provider": "window.quai | window.pelagus",
-  "message": "MetaSPN Wallet Login...",
-  "signature": "0x...",
-  "settlement_status": "local_only_pending_server_session"
+  "type": "kipper_identity_receipt",
+  "x_handle": "creator",
+  "kipper_url": "https://kipper.money/",
+  "quai_address": "0x... | null",
+  "verification_status": "local_only_pending_kipper_twitter_verification",
+  "settlement_status": "not_settleable_until_server_verified"
 }</pre></div>
-        <div class="cta"><a class="btn primary" href="/wallet/">Open wallet login</a></div>
+        <div class="cta"><a class="btn primary" href="/kipper/">Open Kipper login</a></div>
       </section>
 
       <section class="section" id="energy">

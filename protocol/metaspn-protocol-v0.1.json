@@ -18,23 +18,26 @@
     "reuse_count": "How many later queries reused a prior receipt, corpus item, cache entry, or helper resolution."
   },
   "receipt_types": {
-    "wallet_login_receipt": {
-      "purpose": "Proof that a user controlled a Quai address for MetaSPN identity, connection receipts, and future proof-of-energy-saved rebates.",
+    "kipper_identity_receipt": {
+      "purpose": "Proof that a user claimed an X/Kipper identity for MetaSPN audience entry, connection receipts, and future proof-of-energy-saved rebates.",
       "required_fields": [
         "id",
         "type",
         "version",
         "created_at",
-        "address",
+        "x_handle",
+        "kipper_url",
         "domain",
         "nonce",
-        "message",
-        "signature",
-        "provider",
+        "verification_status",
         "settlement_status"
       ],
-      "settlement_basis": "identity/provenance only; no payment or rebate unless later referenced by connection, resolution, or energy rebate receipts",
-      "privacy": "Address and signature may be shared by the user; server-side storage must not imply investment return or expose private referral graph."
+      "optional_fields": [
+        "quai_address",
+        "x_url"
+      ],
+      "settlement_basis": "identity/provenance only; no payment or rebate unless later server-verified through Kipper/Twitter and referenced by connection, resolution, or energy rebate receipts",
+      "privacy": "X handle is public-facing; optional Quai address should not expose private referral graph or imply investment return."
     },
     "connection_receipt": {
       "purpose": "Payment for creating the trusted edge by which a user entered MetaSPN.",
@@ -336,7 +339,7 @@
     }
   },
   "validation_rules": [
-    "Wallet login receipts must be signed through a Quai-compatible injected provider such as Pelagus using personal_sign over a domain-bound nonce message.",
+    "Kipper identity receipts are local-only until MetaSPN verifies the X/Kipper identity server-side; unverified receipts are not settleable.",
     "saved.tokens_not_externalized must equal max(0, baseline.estimated_input_tokens + baseline.estimated_output_tokens - actual.external_input_tokens - actual.external_output_tokens).",
     "saved.energy_saved_units defaults to saved.tokens_not_externalized unless a later energy conversion table is published.",
     "The sum of credited_to.share should be <= 1.0.",
@@ -385,17 +388,18 @@
       "raw_text_stored_offchain": true
     }
   },
-  "example_wallet_login_receipt": {
-    "id": "wlr_20260713_000001",
-    "type": "wallet_login_receipt",
+  "example_kipper_identity_receipt": {
+    "id": "kir_20260713_000001",
+    "type": "kipper_identity_receipt",
     "version": "0.1.0",
-    "created_at": "2026-07-13T20:45:00Z",
-    "address": "0x0000000000000000000000000000000000000000",
+    "created_at": "2026-07-13T21:15:00Z",
+    "x_handle": "creator",
+    "kipper_url": "https://kipper.money/",
+    "x_url": "https://x.com/creator",
+    "quai_address": null,
     "domain": "www.metaspn.network",
     "nonce": "example_nonce",
-    "provider": "window.quai",
-    "message": "MetaSPN Wallet Login\\nPurpose: prove control of a Quai address for connection receipts and proof-of-energy-saved rebates.\\nDomain: www.metaspn.network\\nAddress: 0x...\\nIssued At: 2026-07-13T20:45:00Z\\nNonce: example_nonce\\nNo transaction. No funds requested.",
-    "signature": "0xsignature",
-    "settlement_status": "local_only_pending_server_session"
+    "verification_status": "local_only_pending_kipper_twitter_verification",
+    "settlement_status": "not_settleable_until_server_verified"
   }
 }
